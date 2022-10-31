@@ -44,3 +44,5 @@ function solve(cities , sortingMark){
 }
 
 console.log(solve(inputArray,'destination'));
+
+//export {}
