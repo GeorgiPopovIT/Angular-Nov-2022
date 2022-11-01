@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "GorgesMusicClient", "GorgesMusicClient\GorgesMusicClient.esproj", "{A3A77044-79C8-48AB-B700-83B4F251FCDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GorgesMusicBackend", "GorgesMusicBackend\GorgesMusicBackend.csproj", "{975094E2-A47F-480A-AEFF-40FFB9946A52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GorgesMusic.Data", "GorgesMusic\GorgesMusic.Data.csproj", "{E9CAABC4-B39A-4934-8A6C-4EEEEDDDACD2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3A77044-79C8-48AB-B700-83B4F251FCDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3A77044-79C8-48AB-B700-83B4F251FCDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3A77044-79C8-48AB-B700-83B4F251FCDD}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A3A77044-79C8-48AB-B700-83B4F251FCDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3A77044-79C8-48AB-B700-83B4F251FCDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3A77044-79C8-48AB-B700-83B4F251FCDD}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{975094E2-A47F-480A-AEFF-40FFB9946A52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{975094E2-A47F-480A-AEFF-40FFB9946A52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{975094E2-A47F-480A-AEFF-40FFB9946A52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{975094E2-A47F-480A-AEFF-40FFB9946A52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9CAABC4-B39A-4934-8A6C-4EEEEDDDACD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9CAABC4-B39A-4934-8A6C-4EEEEDDDACD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9CAABC4-B39A-4934-8A6C-4EEEEDDDACD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9CAABC4-B39A-4934-8A6C-4EEEEDDDACD2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C903BF7B-612D-4553-A079-1B45FCACC1D9}
+	EndGlobalSection
+EndGlobal
