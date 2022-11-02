@@ -11,6 +11,6 @@ public class Artist : BaseModel
     [MaxLength(ArtistConstants.ArtistNameMaxLength)]
     public string? Name { get; set; }
 
-    public ICollection<Song> Artists { get; init; } = new HashSet<Song>();
+    public ICollection<Song> Songs { get; init; } = new HashSet<Song>();
 
 }

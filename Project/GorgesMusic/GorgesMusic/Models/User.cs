@@ -1,6 +1,9 @@
-﻿namespace GorgesMusic.Data.Models;
+﻿
+using Microsoft.AspNetCore.Identity;
 
-public class User
+namespace GorgesMusic.Data.Models;
+
+public class User : IdentityUser
 {
     public string? FullName { get; set; }
 }

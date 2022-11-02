@@ -12,4 +12,6 @@ public class Album : BaseModel
     public string? Name { get; set; }
 
     public short Year { get; set; }
+
+    public ICollection<Song> Songs { get; init; } = new HashSet<Song>();
 }
