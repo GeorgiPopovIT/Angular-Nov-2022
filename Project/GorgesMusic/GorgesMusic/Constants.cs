@@ -11,4 +11,12 @@ internal static class Constants
     {
         internal const int SongNameMaxLength = 80;
     }
+    internal static class ArtistConstants
+    {
+        internal const int ArtistNameMaxLength = 50;
+    }
+    internal static class AlbumConstants
+    {
+        internal const int AlbumNameMaxLength = 50;
+    }
 }

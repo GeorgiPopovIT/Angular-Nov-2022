@@ -4,12 +4,12 @@ using static GorgesMusic.Data.Constants;
 
 namespace GorgesMusic.Data.Models;
 
-public class Playlist : BaseModel
+public class Album : BaseModel
 {
     [Required]
     [Unicode(true)]
-    [MaxLength(PlaylistConstants.PlayListNameMaxLength)]
+    [MaxLength(AlbumConstants.AlbumNameMaxLength)]
     public string? Name { get; set; }
 
-    public ICollection<Song> Songs { get; init; } = new HashSet<Song>();
+    public short Year { get; set; }
 }
