@@ -1,16 +1,18 @@
 ﻿using GorgesMusic.Data.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace GorgesMusic.Data;
 
-public class GorgesMusicDbContext : DbContext
+public class GorgesMusicDbContext : IdentityDbContext<User>
 {
     public GorgesMusicDbContext()
     { }
 
     public GorgesMusicDbContext(DbContextOptions<GorgesMusicDbContext> options)
         : base(options)
-    { }
+    {}
 
     public DbSet<Song> Songs { get; set; }
 
@@ -23,6 +25,8 @@ public class GorgesMusicDbContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseNpgsql("Host=localhost; Database=GorgesMusic; Username=postgres; Password=12345");
+
+
         base.OnConfiguring(optionsBuilder);
     }
 
