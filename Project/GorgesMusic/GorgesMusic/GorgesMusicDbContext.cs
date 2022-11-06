@@ -37,6 +37,7 @@ public class GorgesMusicDbContext : IdentityDbContext<User>
             .HasConversion(v => v.ToString(),
                         v => (Genre)Enum.Parse(typeof(Genre), v));
 
+
         base.OnModelCreating(modelBuilder);
     }
 }

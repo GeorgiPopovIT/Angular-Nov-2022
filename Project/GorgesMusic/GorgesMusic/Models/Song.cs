@@ -13,6 +13,8 @@ public class Song : BaseModel
 
     public Genre Genre { get; set; }
 
+    public ICollection<Album> Albums { get; init; } = new HashSet<Album>();
+
     public ICollection<Artist> Artists { get; init; } = new HashSet<Artist>();
 
     public ICollection<Playlist> Playlists { get; init; } = new HashSet<Playlist>();

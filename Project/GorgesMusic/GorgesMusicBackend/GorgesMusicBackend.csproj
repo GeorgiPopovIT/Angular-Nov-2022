@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GorgesMusic.Core\GorgesMusic.Core.csproj" />
     <ProjectReference Include="..\GorgesMusic\GorgesMusic.Data.csproj" />
   </ItemGroup>
 
