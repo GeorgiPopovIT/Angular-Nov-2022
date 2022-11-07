@@ -18,5 +18,12 @@ public class Song : ControllerBase
     public async Task<IActionResult> GetSong(int id, CancellationToken cancellationToken)
     {
         var song = await this._songService.GetSongByIdAsync(id,cancellationToken);
+
+        if (song is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(song);
     }
 }
