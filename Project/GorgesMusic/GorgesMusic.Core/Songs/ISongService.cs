@@ -4,5 +4,13 @@ namespace GorgesMusic.Core.Songs;
 
 public interface ISongService
 {
-    Task<SongViewModel> GetSongByIdAsync(int id,CancellationToken cancellationToken);
+    Task<IEnumerable<SongViewModel>> GetAllAsync(CancellationToken cancellationToken);
+
+    Task<SongViewModel> GetSongByIdAsync(int id, CancellationToken cancellationToken);
+
+    Task CreateSong(SongInputModel input);
+
+    Task UpdateSongAsync(SongInputModel input);
+
+    Task<bool> DeleteSongAsync(int id, CancellationToken cancellationToken);
 }

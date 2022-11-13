@@ -26,7 +26,6 @@ public class GorgesMusicDbContext : IdentityDbContext<User>
     {
         optionsBuilder.UseNpgsql("Host=localhost; Database=GorgesMusic; Username=postgres; Password=12345");
 
-
         base.OnConfiguring(optionsBuilder);
     }
 

@@ -16,7 +16,13 @@ export class ClickComponent  {
 
   constructor() {
     this.counter = 0;
-   }
+
+    setInterval(() => {
+      this.counter++;
+    },1000);
+
+  // setInterval(this.increment,1000);
+  }
 
 visible(inputEl : HTMLInputElement) : void{
   this.isVisible = !this.isVisible;
@@ -30,7 +36,9 @@ addNewItem(value: string) {
   this.outputValue.emit(value);
 }
 
-  increment(){
+  increment()  {
     this.counter++;
   }
+
+  
 }
