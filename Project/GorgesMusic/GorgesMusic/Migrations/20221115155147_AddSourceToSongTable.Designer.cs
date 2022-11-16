@@ -3,6 +3,7 @@ using System;
 using GorgesMusic.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace GorgesMusic.Data.Migrations
 {
     [DbContext(typeof(GorgesMusicDbContext))]
-    partial class GorgesMusicDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221115155147_AddSourceToSongTable")]
+    partial class AddSourceToSongTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -135,13 +137,6 @@ namespace GorgesMusic.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AudioLink")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("CardImage")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("timestamp with time zone");
 
@@ -152,6 +147,10 @@ namespace GorgesMusic.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .IsUnicode(true)
+                        .HasColumnType("text");
+
+                    b.Property<string>("Source")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");

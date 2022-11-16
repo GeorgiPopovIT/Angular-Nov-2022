@@ -7,9 +7,14 @@ namespace GorgesMusic.Data.Models;
 public class Song : BaseModel
 {
     [Required]
-    [Unicode(true)]
+    [Unicode(true)] 
     //[MaxLength(SongConstants.SongNameMaxLength)]
     public string? Name { get; set; }
+
+    public string? CardImage { get; set; }
+
+    [Required]
+    public string? AudioLink { get; set; }
 
     public Genre Genre { get; set; }
 

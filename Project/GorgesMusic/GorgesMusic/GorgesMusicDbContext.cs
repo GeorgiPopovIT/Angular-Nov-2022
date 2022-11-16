@@ -29,14 +29,14 @@ public class GorgesMusicDbContext : IdentityDbContext<User>
         base.OnConfiguring(optionsBuilder);
     }
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Song>()
             .Property(e => e.Genre)
             .HasConversion(v => v.ToString(),
                         v => (Genre)Enum.Parse(typeof(Genre), v));
-
-
         base.OnModelCreating(modelBuilder);
+
     }
 }

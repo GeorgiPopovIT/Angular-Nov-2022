@@ -1,7 +1,7 @@
-﻿using GorgesMusic.Core.Models.Songs;
+﻿using GorgesMusic.Core.Files;
+using GorgesMusic.Core.Models.Songs;
 using GorgesMusic.Data;
 using GorgesMusic.Data.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace GorgesMusic.Core.Songs;
@@ -9,15 +9,32 @@ namespace GorgesMusic.Core.Songs;
 public class SongService : ISongService
 {
     private readonly GorgesMusicDbContext _dbContext;
+    private readonly FileService _fileService;
 
-    public SongService(GorgesMusicDbContext dbContext)
+    public SongService(GorgesMusicDbContext dbContext, FileService fileService)
     {
-        _dbContext = dbContext;
+        this._dbContext = dbContext;
+        this._fileService = fileService;
     }
 
-    public Task CreateSong(SongInputModel input)
+    public async Task CreateSong(SongInputModel input)
     {
-        throw new NotImplementedException();
+        if (input is null)
+        {
+            throw new ArgumentNullException("Input is null.");
+        }
+
+        var cloudinaryFileUrl = await this._fileService.UploadFileAsync(input.File);
+
+        var song = new Song
+        {
+            Name = input.Name,
+            Genre = input.Genre,
+            AudioLink = cloudinaryFileUrl
+        };
+
+        await this._dbContext.Songs.AddAsync(song);
+        await this._dbContext.SaveChangesAsync();
     }
 
     public async Task UpdateSongAsync(SongInputModel input)
@@ -36,7 +53,7 @@ public class SongService : ISongService
 
     }
 
-    public async Task<bool> DeleteSongAsync(int id)
+    public async Task<bool> DeleteSongAsync(int id, CancellationToken cancellationToken)
     {
         var songToRemove = this._dbContext.Songs.Find(id);
 
