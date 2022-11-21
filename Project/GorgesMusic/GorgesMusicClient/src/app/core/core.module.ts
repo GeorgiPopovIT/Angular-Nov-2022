@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AsideComponent } from './aside/aside.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
+import {MainComponent} from './main/main.component';
+import { SongModule } from '../song/song.module';
 
 @NgModule({
-  declarations: [AsideComponent],
+  declarations: [AsideComponent,MainComponent],
   imports: [
     CommonModule,
-    MatSidenavModule
+    SongModule
   ],
-  exports: [AsideComponent]
+  exports: [AsideComponent,MainComponent]
 })
 export class CoreModule { }

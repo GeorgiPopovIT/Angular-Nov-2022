@@ -74,10 +74,18 @@ public class SongService : ISongService
         => await this._dbContext.Songs.Select(s => new SongViewModel
         {
             Id = s.Id,
-            Name = s.Name
+            Name = s.Name,
+            ImageLink = s.CardImage,
+            AudioLink = s.AudioLink
         }).ToListAsync();
 
     public async Task<SongViewModel> GetSongByIdAsync(int id, CancellationToken cancellationToken)
-        => await this._dbContext.Songs.Select(s => new SongViewModel { Id = s.Id, Name = s.Name })
+        => await this._dbContext.Songs.Select(s => new SongViewModel
+        {
+            Id = s.Id,
+            Name = s.Name,
+            AudioLink = s.AudioLink,
+            ImageLink = s.CardImage
+        })
         .FirstOrDefaultAsync(s => s.Id == id);
 }
