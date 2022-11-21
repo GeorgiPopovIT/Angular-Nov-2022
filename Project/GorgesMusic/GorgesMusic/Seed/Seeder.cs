@@ -2,9 +2,7 @@
 using CsvHelper;
 using System.Globalization;
 using GorgesMusic.Data.Models;
-using Microsoft.EntityFrameworkCore;
-using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
+
 
 namespace GorgesMusic.Data.Seed;
 
@@ -64,6 +62,7 @@ public static class Seeder
                 AudioLink = lines[i].AudioLink,
                 CardImage = lines[i].ImageLink.Split(",")[3]
             };
+
             dbContext.Songs.Add(song);
             Console.WriteLine(song);
         }

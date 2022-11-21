@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public forecasts?: WeatherForecast[];
+  //public forecasts?: WeatherForecast[];
 
   constructor(http: HttpClient) {
     // http.get<WeatherForecast[]>('/weatherforecast').subscribe(result => {
@@ -18,9 +18,9 @@ export class AppComponent {
   title = 'GorgesMusicClient';
 }
 
-interface WeatherForecast {
-  date: string;
-  temperatureC: number;
-  temperatureF: number;
-  summary: string;
-}
+// interface WeatherForecast {
+//   date: string;
+//   temperatureC: number;
+//   temperatureF: number;
+//   summary: string;
+// }
