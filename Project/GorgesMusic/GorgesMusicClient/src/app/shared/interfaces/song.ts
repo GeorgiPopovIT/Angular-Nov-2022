@@ -1,5 +1,5 @@
-export interface ISong{
-    _id : number;
+export interface Song{
+    id : number;
     name : string;
     imageLink : string;
     audioLink : string;

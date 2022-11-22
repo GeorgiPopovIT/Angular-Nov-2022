@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ISong } from '../shared/interfaces/song';
+import { Song } from '../shared/interfaces/song';
 
 const baseApiUrl = environment.apiURL;
 
@@ -14,7 +14,7 @@ export class SongService {
 
   constructor(private httpClient : HttpClient) { }
 
-  getAllSongs()  :Observable<ISong[]>{
-    return this.httpClient.get<ISong[]>(baseApiUrl + '/api/songs');
+  getAllSongs() : Observable<Song[]>{
+    return this.httpClient.get<Song[]>(baseApiUrl +'/song');
   }
 }

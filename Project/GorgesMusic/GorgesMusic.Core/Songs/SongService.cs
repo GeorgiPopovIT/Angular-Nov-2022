@@ -9,9 +9,9 @@ namespace GorgesMusic.Core.Songs;
 public class SongService : ISongService
 {
     private readonly GorgesMusicDbContext _dbContext;
-    private readonly FileService _fileService;
+    private readonly IFileService _fileService;
 
-    public SongService(GorgesMusicDbContext dbContext, FileService fileService)
+    public SongService(GorgesMusicDbContext dbContext, IFileService fileService)
     {
         this._dbContext = dbContext;
         this._fileService = fileService;

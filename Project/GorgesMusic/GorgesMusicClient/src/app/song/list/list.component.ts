@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ISong } from 'src/app/shared/interfaces/song';
+import { Song } from 'src/app/shared/interfaces/song';
 import { SongService } from 'src/app/services/song.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 
 @Component({
   selector: 'app-list',
@@ -8,14 +9,13 @@ import { SongService } from 'src/app/services/song.service';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-    songs: ISong[] | null = null;
+    public songs!: Song[];
 
   constructor(private songService : SongService) { }
 
   ngOnInit(): void {
       this.songService.getAllSongs().subscribe({
       next: (value) => {
-        console.log(value);
         this.songs = value;
       },
       error: (Response) => {
@@ -23,5 +23,4 @@ export class ListComponent implements OnInit {
       }
     });
   }
-
 }

@@ -6,7 +6,8 @@ export const routes: Routes = [
   {
     path : '',
     pathMatch: 'full',  
-    redirectTo : '/song/list'
+    redirectTo : '/song/list',
+    component: ListComponent
   }
 ];
 

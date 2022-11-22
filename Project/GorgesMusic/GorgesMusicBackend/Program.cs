@@ -1,9 +1,9 @@
 using CloudinaryDotNet;
+using GorgesMusic.Core.Files;
+using GorgesMusic.Core.Songs;
 using GorgesMusic.Data;
 using GorgesMusic.Data.Models;
 using GorgesMusic.Data.Seed;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,18 +27,21 @@ Cloudinary cloudinary = new Cloudinary(account);
 //cloudinary.Api.Secure = true;
 
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-});
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(options =>
+//{
+//});
 
 //builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton(cloudinary);
+builder.Services.AddScoped<ISongService, SongService>();
+builder.Services.AddScoped<IFileService, FileService>();
+
 
 var app = builder.Build();
 
@@ -61,6 +64,9 @@ if (app.Environment.IsDevelopment())
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
+
+app.UseCors(policy => policy.AllowAnyHeader()
+            .AllowAnyMethod().AllowAnyOrigin());
 
 app.UseAuthentication();
 app.UseAuthorization();

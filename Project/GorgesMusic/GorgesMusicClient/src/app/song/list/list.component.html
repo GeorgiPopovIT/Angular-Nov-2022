@@ -1,15 +1,18 @@
-<div *ngFor="let song in songs" id="content" class="p-4 p-md-5 pt-5 row">
-    <div class="col-md-2">
-        <div class="card" style="width: 18rem;">
-            <img src="{{song.imageLink}}" class="card-img-top" alt="Img">
-            <div class="card-body">
+<div *ngIf="songs" class="row">
+    <div col-3 col-sm-3 col-md-3 col-lg-3 *ngFor="let song of songs" id="content" class="p-4 p-md-5 pt-5 ">
+      <div class="col-md-3">
+          <div class="card" style="width: 12rem;">
+            <input type="hidden" id="song.id">
+              <img src="{{song.imageLink}}" class="card-img-top" alt="Img">
+              <div class="card-body">
               <h5 class="card-title">{{song.name}}</h5>
               <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
               <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              </div>
             </div>
-          </div>
+      </div>
     </div>
 </div>
 <div *ngIf="!songs">
-    <p>No songs</p>
+  <mat-spinner></mat-spinner>
 </div>

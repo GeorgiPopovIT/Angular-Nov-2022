@@ -60,7 +60,7 @@ public static class Seeder
             {
                 Name = lines[i].Song,
                 AudioLink = lines[i].AudioLink,
-                CardImage = lines[i].ImageLink.Split(",")[3]
+                CardImage = lines[i].ImageLink.Split(",")[3].Trim(),
             };
 
             dbContext.Songs.Add(song);

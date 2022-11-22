@@ -33,7 +33,6 @@ public class SongController : ControllerBase
     {
         var songs = await this._songService.GetAllAsync(cancellationToken);
 
-
         return Ok(songs);
     }
 
@@ -70,7 +69,7 @@ public class SongController : ControllerBase
     }
 
     [HttpDelete("id")]
-    public async Task<ActionResult> DeleteSong(int id,CancellationToken cancellationToken)
+    public async Task<ActionResult> DeleteSong(int id, CancellationToken cancellationToken)
     {
         var isDeletedSong = await this._songService.DeleteSongAsync(id, cancellationToken);
         if (!isDeletedSong)
