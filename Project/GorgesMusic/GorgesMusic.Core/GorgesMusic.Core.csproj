@@ -14,8 +14,4 @@
     <ProjectReference Include="..\GorgesMusic\GorgesMusic.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Users\" />
-  </ItemGroup>
-
 </Project>

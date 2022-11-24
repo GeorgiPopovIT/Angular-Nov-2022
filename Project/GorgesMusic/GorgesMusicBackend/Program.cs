@@ -4,11 +4,14 @@ using GorgesMusic.Core.Songs;
 using GorgesMusic.Data;
 using GorgesMusic.Data.Models;
 using GorgesMusic.Data.Seed;
+using GorgesMusicBackend;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 Account account = new(
@@ -22,28 +25,44 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<GorgesMusicDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<GorgesMusicDbContext>();
+builder.Services.AddDefaultIdentity<User>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.Password.RequireDigit  =false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase =  false;
+                options.Password.RequireLowercase = false;
+            })
+              .AddRoles<IdentityRole>()
+              .AddEntityFrameworkStores<GorgesMusicDbContext>();
 
 Cloudinary cloudinary = new Cloudinary(account);
 //cloudinary.Api.Secure = true;
 
+var jwtSettingsConfiguration = builder.Configuration.GetSection("JwtSetting");
+builder.Services.Configure<JwtSettings>(jwtSettingsConfiguration);
 
-builder.Services.AddAuthentication().AddIdentityServerJwt();
+var jwtSettings = jwtSettingsConfiguration.Get<JwtSettings>();
+var key = Encoding.ASCII.GetBytes(jwtSettings.Secret);
 
-builder.Services.Configure<JwtBearerOptions>(
-    IdentityServerJwtConstants.IdentityServerJwtBearerScheme,
-    options =>
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
     {
-        var onTokenValidated = options.Events.OnTokenValidated;
-
-        options.Events.OnTokenValidated = async context =>
+        options.TokenValidationParameters = new TokenValidationParameters
         {
-            await onTokenValidated(context);
-
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key)
         };
     });
+
+builder.Services.AddAuthorization();
+
 
 //builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
