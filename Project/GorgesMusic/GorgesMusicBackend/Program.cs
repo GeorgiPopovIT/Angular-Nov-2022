@@ -32,6 +32,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase =  false;
                 options.Password.RequireLowercase = false;
+                options.Password.RequiredLength = 5;
             })
               .AddRoles<IdentityRole>()
               .AddEntityFrameworkStores<GorgesMusicDbContext>();

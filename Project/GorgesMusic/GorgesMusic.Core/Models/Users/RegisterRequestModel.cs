@@ -2,10 +2,10 @@
 
 namespace GorgesMusic.Core.Models.Users;
 
-public class RegisterInputModel
+public class RegisterRequestModel
 {
     [Required]
-    [EmailAddress]
+    [EmailAddress(ErrorMessage ="Invalid email.")]
     public string Email { get; init; }
 
     [Required]
@@ -13,5 +13,6 @@ public class RegisterInputModel
     public string Username { get; init; }
 
     [Required]
+    [MinLength(5, ErrorMessage = "Password must be at least 5 characters.")]
     public string Password { get; init; }
 }

@@ -26,6 +26,7 @@ public class IdentityController : ControllerBase
         this._jwtSettings = jwtSettings;
     }
 
+    [Route(nameof(Register))]
     public async Task<ActionResult> Register(RegisterRequestModel model)
     {
         var user = new User
@@ -44,10 +45,12 @@ public class IdentityController : ControllerBase
         return BadRequest(result.Errors);
     }
 
+    [Route(nameof(Login))]
     public async Task<ActionResult<string>> Login(LoginRequestModel model)
     {
 
         var user = await this._userManager.FindByNameAsync(model.Username);
+
         if (user is null)
         {
             return Unauthorized();
@@ -58,24 +61,8 @@ public class IdentityController : ControllerBase
         {
             return Unauthorized();
         }
+        var token = this._userService.GenerateJwtToken(user.Id, user.UserName, this._jwtSettings.Value.Secret);
 
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(this._jwtSettings.Value.Secret);
-
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(new[]
-            {
-               new Claim(ClaimTypes.Name, user.Id.ToString())
-             }),
-            Expires = DateTime.UtcNow.AddMinutes(5),
-            SigningCredentials = new SigningCredentials
-            (new SymmetricSecurityKey(key),
-            SecurityAlgorithms.HmacSha512Signature)
-        };
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        var jwtToken = tokenHandler.WriteToken(token);
-
-        return jwtToken;
+        return token;
     }
 }
