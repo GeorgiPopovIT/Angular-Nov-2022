@@ -1,15 +1,15 @@
 using CloudinaryDotNet;
 using GorgesMusic.Core.Files;
 using GorgesMusic.Core.Songs;
+using GorgesMusic.Core.Users;
 using GorgesMusic.Data;
 using GorgesMusic.Data.Models;
 using GorgesMusic.Data.Seed;
 using GorgesMusicBackend;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
@@ -21,7 +21,6 @@ Account account = new(
 
 
 // Add services to the container.
-builder.Services.AddControllers();
 builder.Services.AddDbContext<GorgesMusicDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
@@ -46,23 +45,24 @@ builder.Services.Configure<JwtSettings>(jwtSettingsConfiguration);
 var jwtSettings = jwtSettingsConfiguration.Get<JwtSettings>();
 var key = Encoding.ASCII.GetBytes(jwtSettings.Secret);
 
-builder.Services.AddAuthentication(opt =>
-{
-    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = false,
-            ValidateAudience = false,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(key)
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false
         };
     });
 
 builder.Services.AddAuthorization();
+
+builder.Services.AddControllers();
 
 
 //builder.Services.AddEndpointsApiExplorer();
@@ -71,6 +71,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddSingleton(cloudinary);
 builder.Services.AddScoped<ISongService, SongService>();
 builder.Services.AddScoped<IFileService, FileService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 var app = builder.Build();

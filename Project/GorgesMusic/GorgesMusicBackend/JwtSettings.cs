@@ -2,5 +2,5 @@
 
 public class JwtSettings
 {
-    public string? Secret { get; init; }
+    public string Secret { get; set; }
 }

@@ -32,6 +32,10 @@ public class SongController : ControllerBase
     public async Task<ActionResult<IEnumerable<SongViewModel>>> GetAllSongs(CancellationToken cancellationToken)
     {
         var songs = await this._songService.GetAllAsync(cancellationToken);
+        if (songs is null)
+        {
+            return BadRequest();
+        }
 
         return Ok(songs);
     }

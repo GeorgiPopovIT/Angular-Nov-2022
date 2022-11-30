@@ -5,17 +5,23 @@ import { RegisterComponent } from "./register/register.component";
 
 const routes : Routes = [
     {
-        path : 'auth/login',
-        component : LoginComponent
-    },
-    {
-        path : 'auth/register',
-        component : RegisterComponent
-    },
-    {
-        path : 'auth/logout',
-        component : LogoutComponent
+        path : 'auth',
+        children : [
+             {
+                path : 'login',
+                component : LoginComponent
+            },
+            {
+                path : 'register',
+                component : RegisterComponent
+            },
+            {
+                path : 'logout',
+                component : LogoutComponent
+            }
+        ]
     }
+   
 ];
 
 export const AuthRoutingModule = RouterModule.forChild(routes);

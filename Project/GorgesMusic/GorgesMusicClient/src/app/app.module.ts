@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
+import { AuthModule } from './auth/auth.module';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -16,9 +18,16 @@ import { CoreModule } from './core/core.module';
     AppComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, BrowserAnimationsModule,
-    CoreModule, AppRoutingModule, NgbModule,NgbPaginationModule,
-     NgbAlertModule
+    BrowserModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    CoreModule,
+    AppRoutingModule,
+    NgbModule,
+    NgbPaginationModule,
+    NgbAlertModule,
+    AuthModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

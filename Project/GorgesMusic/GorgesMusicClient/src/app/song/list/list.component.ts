@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Song } from 'src/app/shared/interfaces/song';
 import { SongService } from 'src/app/services/song.service';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-list',
@@ -10,7 +10,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner'
 })
 export class ListComponent implements OnInit {
     public songs!: Song[];
-
+  isu: boolean = true;
   constructor(private songService : SongService) { }
 
   ngOnInit(): void {
@@ -20,6 +20,7 @@ export class ListComponent implements OnInit {
       },
       error: (Response) => {
         console.log(Response);
+        console.log(this.songs.length);
       }
     });
   }

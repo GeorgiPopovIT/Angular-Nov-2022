@@ -1,18 +1,26 @@
 <div class="row">
-    <div *ngFor="let song of songs" id="content" class="col-3 col-sm-3 col-md-3 col-lg-3">
-      <div class="col-md-3">
-          <div class="card" style="width: 11rem;">
-            <input type="hidden" id="{{song.id}}">
-              <img src="{{song.imageLink}}" class="card-img-top" alt="Img">
-              <div class="card-body">
-              <h5 class="card-title">{{song.name}}</h5>
-              <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a> -->
+  <div *ngFor="let song of songs" class="col-3 col-sm-3 col-md-3 col-lg-3">
+    <div class="col-md-3">
+        <div class="card" style="width: 11rem;">
+          <input type="hidden" id="{{song.id}}">
+            <img src="{{song.imageLink}}" class="card-img-top" alt="Img">
+            <div class="card-body">
+            <h6 class="card-title row">{{song.name}}</h6>
+            <a class="btn btn-primary"><i class="bi bi-play"></i>Play</a>
+            <div class="btn-group">
+              <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Options
+              </button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Action</a>
               </div>
             </div>
-      </div>
+           </div>
+        </div>
     </div>
+  </div>
 </div>
+
 <div *ngIf="!songs">
   <mat-spinner></mat-spinner>
 </div>

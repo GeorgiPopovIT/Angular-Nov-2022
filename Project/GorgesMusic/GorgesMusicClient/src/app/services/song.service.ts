@@ -15,6 +15,13 @@ export class SongService {
   constructor(private httpClient : HttpClient) { }
 
   getAllSongs() : Observable<Song[]>{
-    return this.httpClient.get<Song[]>(baseApiUrl +'/song');
+    return this.httpClient.get<Song[]>(baseApiUrl +'/api/song');
+  }
+
+  playAudio(mp3Url : string){
+    let audio = new Audio();
+    audio.src = mp3Url;
+    audio.load();
+    audio.play();
   }
 }
