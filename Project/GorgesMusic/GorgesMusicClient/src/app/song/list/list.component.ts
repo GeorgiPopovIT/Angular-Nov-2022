@@ -9,9 +9,9 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-    public songs!: Song[];
-  isu: boolean = true;
-  constructor(private songService : SongService) { }
+    public songs! : Song[];
+
+    constructor(private songService : SongService) { }
 
   ngOnInit(): void {
       this.songService.getAllSongs().subscribe({
@@ -20,7 +20,6 @@ export class ListComponent implements OnInit {
       },
       error: (Response) => {
         console.log(Response);
-        console.log(this.songs.length);
       }
     });
   }

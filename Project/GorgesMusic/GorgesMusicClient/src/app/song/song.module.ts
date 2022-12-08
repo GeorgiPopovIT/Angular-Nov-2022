@@ -4,7 +4,8 @@ import { ListComponent } from './list/list.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { PlayComponent } from './play/play.component';
-
+import { HttpClientModule } from '@angular/common/http';
+// import { NgxAudioPlayerModule } from 'ngx-audio-player';
 
 
 
@@ -15,9 +16,10 @@ import { PlayComponent } from './play/play.component';
   ],
   imports: [
     CommonModule,
+    NgbDropdownModule,
     MatProgressSpinnerModule,
-    NgbDropdownModule
+    HttpClientModule
   ],
-  exports:[ListComponent]
+  exports:[ListComponent,PlayComponent]
 })
 export class SongModule { }

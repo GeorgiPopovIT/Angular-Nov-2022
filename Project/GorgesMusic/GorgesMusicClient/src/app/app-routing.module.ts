@@ -1,19 +1,14 @@
-//import { NgModule } from '@angular/core';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListComponent } from './song/list/list.component';
 
-export const routes: Routes = [
+const routes: Routes = [
   {
     path : '',
     pathMatch: 'full',  
-    redirectTo : '/song/list',
-    component: ListComponent
-  }
-];
+    redirectTo : '/song/list'
+  }];
 
-
-  @NgModule({
+@NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

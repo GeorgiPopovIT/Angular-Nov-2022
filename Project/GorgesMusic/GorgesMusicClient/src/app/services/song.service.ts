@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+// import { Track } from 'ngx-audio-player';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Song } from '../shared/interfaces/song';
@@ -18,10 +19,14 @@ export class SongService {
     return this.httpClient.get<Song[]>(baseApiUrl +'/api/song');
   }
 
-  playAudio(mp3Url : string){
-    let audio = new Audio();
-    audio.src = mp3Url;
-    audio.load();
-    audio.play();
-  }
+  // playAudio(mp3Url : string){
+  //   let audio = new Audio();
+  //   audio.src = mp3Url;
+  //   audio.load();
+  //   audio.play();
+  // }
+
+  // addSongToPlayList() : Observable<Track>{
+    
+  // }
 }
