@@ -5,7 +5,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { PlayComponent } from './play/play.component';
 import { HttpClientModule } from '@angular/common/http';
-// import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -18,7 +19,9 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     NgbDropdownModule,
     MatProgressSpinnerModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxAudioPlayerModule,
+    RouterModule
   ],
   exports:[ListComponent,PlayComponent]
 })

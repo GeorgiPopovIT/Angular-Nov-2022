@@ -1,15 +1,31 @@
-import { NgModule } from '@angular/core';
+// import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ListComponent } from './song/list/list.component';
+import { PlayComponent } from './song/play/play.component';
 
 const routes: Routes = [
   {
     path : '',
     pathMatch: 'full',  
-    redirectTo : '/song/list'
-  }];
+    component : ListComponent,
+  },
+  {
+    path : 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: 'song/play/:id',
+    component : PlayComponent
+  },
+  {
+    path: '**',
+    redirectTo:'/not-found'
+  }
+];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }
+// @NgModule({
+//   imports: [RouterModule.forRoot(routes)],
+//   exports: [RouterModule]
+// })
+// export class AppRoutingModule { }
+export const AppRoutingModule = RouterModule.forRoot(routes);

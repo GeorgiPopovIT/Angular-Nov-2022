@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from "./core/core.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SongModule } from './song/song.module';
 
 @NgModule({
     declarations: [
@@ -18,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         AppRoutingModule,
         CoreModule,
         NgbModule,
+        SongModule,
         BrowserAnimationsModule
     ]
 })

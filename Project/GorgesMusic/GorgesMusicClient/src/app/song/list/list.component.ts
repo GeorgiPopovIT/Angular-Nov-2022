@@ -17,7 +17,7 @@ export class ListComponent implements OnInit {
       this.songService.getAllSongs().subscribe({
       next: (value) => {
         this.songs = value;
-      },
+      },  
       error: (Response) => {
         console.log(Response);
       }
