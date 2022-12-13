@@ -14,7 +14,7 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
   },
   {
-    path: 'song/play/:id',
+    path: 'song/:id',
     component : PlayComponent
   },
   {

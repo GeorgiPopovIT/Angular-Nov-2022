@@ -22,9 +22,9 @@
     </div>
     <div class="album-image" style="background-image: url({{song.imageLink}})"></div>
   </div> -->
-
-  <ngx-audio-player   [displayTitle]="msaapDisplayTitle" [autoPlay]="false" 
-    muted="muted" [displayPlaylist]="msaapDisplayPlayList" 
-        [displayVolumeControls]="msaapDisplayVolumeControls" [displayRepeatControls]="msaapDisplayRepeatControls"
-        [disablePositionSlider]="msaapDisablePositionSlider" [displayArtist]="msaapDisplayArtist" 
-        [displayDuration]="msaapDisplayDuration" [expanded]="true"></ngx-audio-player> 
+  <div *ngIf="song">
+     <audio controls autoplay>
+        <source src="{{song.audioLink}}" type="audio/mpeg">
+        Your browser does not support the audio element.
+     </audio>
+  </div>

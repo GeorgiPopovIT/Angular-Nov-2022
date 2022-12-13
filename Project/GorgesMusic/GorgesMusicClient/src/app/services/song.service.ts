@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Track } from 'ngx-audio-player';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Song } from '../shared/interfaces/song';
