@@ -15,10 +15,10 @@ const routes : Routes = [
         {
             path : 'register',
             component : RegisterComponent,
-            data: {
-                title : 'Register',
-                loginRequired : false
-            },
+            // data: {
+            //     title : 'Register',
+            //     loginRequired : false
+            // },
         },
         {
             path : 'logout',

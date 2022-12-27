@@ -1,0 +1,31 @@
+body{
+    font-family: Helvetica,sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+}
+.container{
+    padding: 5% 5% 5% 5%;
+}
+.heading{
+    font-family: Georgia, serif;
+}
+
+blockquote{
+    border-left: rgb(221, 221, 221);
+    font: italic;
+}
+ul blockquote li::before{
+    color: white;
+    border: solid 1px;
+}
+
+table{
+    border: 1px solid gray;
+}
+th{
+    border: gray;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

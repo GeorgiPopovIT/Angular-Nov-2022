@@ -1,5 +1,5 @@
 // import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ListComponent } from './song/list/list.component';
 import { PlayComponent } from './song/play/play.component';
 
@@ -28,4 +28,4 @@ const routes: Routes = [
 //   exports: [RouterModule]
 // })
 // export class AppRoutingModule { }
-export const AppRoutingModule = RouterModule.forRoot(routes);
+export const AppRoutingModule = RouterModule.forRoot(routes,{preloadingStrategy: PreloadAllModules});

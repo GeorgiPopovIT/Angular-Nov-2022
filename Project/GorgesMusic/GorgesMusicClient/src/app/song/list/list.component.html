@@ -20,6 +20,15 @@
     </div>
   </div>
 </div>
-<div *ngIf="!songs">
+<ngb-pagination
+	[collectionSize]="6000"
+	[(page)]="page"
+	[maxSize]="5"
+	[rotate]="true"
+	[ellipses]="false"
+	[boundaryLinks]="true"
+  (pageChange)="loadSongs(page)"
+></ngb-pagination>
+  <div *ngIf="!songs">
   <mat-spinner></mat-spinner>
 </div>

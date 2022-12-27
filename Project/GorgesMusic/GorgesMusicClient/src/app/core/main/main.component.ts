@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -6,11 +6,12 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements OnInit {
+export class MainComponent  implements OnInit {
 
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

@@ -15,8 +15,22 @@ export class PlayComponent implements OnInit {
 
   constructor(private songService : SongService,private route : ActivatedRoute)
    { }
-
+  
   ngOnInit(): void {
+    // let id = this.route.snapshot.params['id'];
+
+    // this.songService.getSongById(id).subscribe({
+    //   next :(value) => {
+    //     this.song = value;
+    //   },
+    //   error: (Response) => {
+    //     console.log(Response);
+    //   }
+    // });
+  }
+
+  loadSong() : void{
+
     let id = this.route.snapshot.params['id'];
 
     this.songService.getSongById(id).subscribe({
@@ -28,15 +42,4 @@ export class PlayComponent implements OnInit {
       }
     });
   }
-
-  // loadSong(id : number) : void{
-  //   this.songService.getSongById(id).subscribe({
-  //     next :(value) => {
-  //       this.song = value;
-  //     },
-  //     error: (Response) => {
-  //       console.log(Response);
-  //     }
-  //   });
-  // }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -11,11 +11,14 @@ const baseApiUrl = environment.apiURL;
   providedIn: 'root'
 })
 export class SongService {
-
   constructor(private httpClient : HttpClient) { }
 
-  getAllSongs() : Observable<Song[]>{
-    return this.httpClient.get<Song[]>(baseApiUrl +'/api/song');
+  getAllSongs(pageNumber? : number , songsPerPage? : number) : Observable<Song[]>{
+    let queryParams = new HttpParams();
+      queryParams.append('pageNumber',pageNumber!);
+      queryParams.append('songsPerPage',songsPerPage!);
+
+      return this.httpClient.get<Song[]>(baseApiUrl +'/api/song', {params: queryParams});
   }
   
   getSongById(id : number) : Observable<Song>{

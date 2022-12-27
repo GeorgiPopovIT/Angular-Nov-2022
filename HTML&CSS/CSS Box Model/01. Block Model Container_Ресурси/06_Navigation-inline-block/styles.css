@@ -1,0 +1,11 @@
+nav a{
+    display: inline-block;
+    color: aquamarine;
+}
+header {
+    display: inline-block;
+    border-bottom: 1px solid black;
+}
+h1{
+    font-family: Helvetica, sans-serif;
+}

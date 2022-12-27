@@ -70,8 +70,9 @@ public class SongService : ISongService
 
     }
 
-    public async Task<IEnumerable<SongViewModel>> GetAllAsync(CancellationToken cancellationToken)
-        => await this._dbContext.Songs.Select(s => new SongViewModel
+    public async Task<IEnumerable<SongViewModel>> GetAllAsync(int pageNumber, int songsPerPage, CancellationToken cancellationToken)
+        => await this._dbContext.Songs.Skip((pageNumber - 1) * songsPerPage)
+        .Take(songsPerPage).Select(s => new SongViewModel
         {
             Id = s.Id,
             Name = s.Name,
