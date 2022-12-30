@@ -13,12 +13,8 @@ const baseApiUrl = environment.apiURL;
 export class SongService {
   constructor(private httpClient : HttpClient) { }
 
-  getAllSongs(pageNumber? : number , songsPerPage? : number) : Observable<Song[]>{
-    let queryParams = new HttpParams();
-      queryParams.append('pageNumber',pageNumber!);
-      queryParams.append('songsPerPage',songsPerPage!);
-
-      return this.httpClient.get<Song[]>(baseApiUrl +'/api/song', {params: queryParams});
+  getAllSongs() : Observable<Song[]>{
+      return this.httpClient.get<Song[]>(baseApiUrl +'/api/song');
   }
   
   getSongById(id : number) : Observable<Song>{

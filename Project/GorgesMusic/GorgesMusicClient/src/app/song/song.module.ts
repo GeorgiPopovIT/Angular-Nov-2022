@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ListComponent } from './list/list.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 import { PlayComponent } from './play/play.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -18,6 +19,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     NgbPaginationModule,
     MatProgressSpinnerModule,
+    NgxPaginationModule,
     HttpClientModule,
     RouterModule
   ],

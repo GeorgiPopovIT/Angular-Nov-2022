@@ -9,12 +9,16 @@ import { SongService } from 'src/app/services/song.service';
 })
 export class ListComponent implements OnInit {
     public songs! : Song[];
-    page = 1 ;
+    page : number = 1;
+    listSize : number = 16;
    
     constructor(private songService : SongService) { }
 
   ngOnInit(): void {
-      this.songService.getAllSongs().subscribe({
+      this.loadSongs();
+  }
+  loadSongs(){
+    this.songService.getAllSongs().subscribe({
       next: (value) => {
         this.songs = value;
       },  
@@ -23,16 +27,10 @@ export class ListComponent implements OnInit {
       }
     });
   }
-  loadSongs(currentPage : number){
 
-    console.log(currentPage)
-    // this.songService.getAllSongs().subscribe({
-    //   next: (value) => {
-    //     this.songs = value;
-    //   },  
-    //   error: (Response) => {
-    //     console.log(Response);
-    //   }
-    // });
+  listSongOnChange(event : any){
+    this.listSize = event.target.value;
+    this.page = event;
+    this.loadSongs();
   }
 }

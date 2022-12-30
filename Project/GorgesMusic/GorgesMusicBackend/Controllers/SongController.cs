@@ -29,9 +29,9 @@ public class SongController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<SongViewModel>>> GetAllSongs([FromQuery]int pageNumber, [FromQuery]int songsPerPage,CancellationToken cancellationToken)
+    public async Task<ActionResult<IEnumerable<SongViewModel>>> GetAllSongs(CancellationToken cancellationToken)
     {
-        var songs = await this._songService.GetAllAsync(pageNumber,  songsPerPage, cancellationToken);
+        var songs = await this._songService.GetAllAsync(cancellationToken);
 
         if (songs is null)
         {
