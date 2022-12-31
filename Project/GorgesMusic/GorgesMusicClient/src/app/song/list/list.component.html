@@ -20,17 +20,8 @@
     </div>
   </div>
 </div>
-<!-- <ngb-pagination
-[collectionSize]="songs.length"
-	[(page)]="page"
-	[maxSize]="size"
-	[rotate]="true"
-	[ellipses]="false"
-	[boundaryLinks]="true"
-  (pageChange)="listSongOnChange($event)">
-</ngb-pagination> -->
 <pagination-controls (pageChange)="page = $event"></pagination-controls>
 
   <div *ngIf="!songs">
-  <mat-spinner></mat-spinner>
-</div>
+    <mat-spinner></mat-spinner>
+  </div>

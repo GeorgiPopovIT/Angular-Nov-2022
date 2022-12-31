@@ -1,8 +1,7 @@
-import { Component, OnInit, Output, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SongService } from 'src/app/services/song.service';
 import { Song } from 'src/app/shared/interfaces/song';
 import { ActivatedRoute } from '@angular/router';
-import { ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-play',
@@ -11,28 +10,19 @@ import { ChangeDetectionStrategy } from '@angular/core';
 })
 export class PlayComponent implements OnInit {
 
-  public song! : Song;
+  public song! : Song | null;
 
   constructor(private songService : SongService,private route : ActivatedRoute)
    { }
   
   ngOnInit(): void {
-    // let id = this.route.snapshot.params['id'];
-
-    // this.songService.getSongById(id).subscribe({
-    //   next :(value) => {
-    //     this.song = value;
-    //   },
-    //   error: (Response) => {
-    //     console.log(Response);
-    //   }
-    // });
+    this.route.params.subscribe(({id}) => {
+      this.song = null;
+      this.loadSong(id);
+    });
   }
 
-  loadSong() : void{
-
-    let id = this.route.snapshot.params['id'];
-
+  loadSong(id : number) : void{
     this.songService.getSongById(id).subscribe({
       next :(value) => {
         this.song = value;
