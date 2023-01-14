@@ -64,6 +64,8 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
 
+builder.Services.AddResponseCaching();
+
 
 //builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
@@ -98,6 +100,7 @@ app.UseHttpsRedirection();
 
 app.UseCors(policy => policy.AllowAnyHeader()
             .AllowAnyMethod().AllowAnyOrigin());
+app.UseResponseCaching();
 
 app.UseAuthentication();
 app.UseAuthorization();

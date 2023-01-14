@@ -7,7 +7,7 @@ import { CoreModule } from "./core/core.module";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SongModule } from './song/song.module';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     declarations: [
@@ -21,6 +21,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
         CoreModule,
         NgbModule,
         SongModule,
+        RouterModule,
         BrowserAnimationsModule
     ]
 })

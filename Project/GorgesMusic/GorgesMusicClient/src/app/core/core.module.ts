@@ -4,14 +4,15 @@ import { AsideComponent } from './aside/aside.component';
 import { RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { SongModule } from "../song/song.module";
-import { ListComponent } from '../song/list/list.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 
 @NgModule({
     declarations: [
         AsideComponent,
-        MainComponent
+        MainComponent,
+        PageNotFoundComponent
     ],
     exports: [AsideComponent, MainComponent],
     imports: [

@@ -18,7 +18,10 @@ export class RegisterComponent  {
   constructor(private fb : FormBuilder, private authService : AuthService){ 
       
    }
-      registerFormSubmit(form : NgForm) : void {
+      registerFormSubmit() : void {
+        if(this.registerForm.invalid){
+          const {email,username, password} = this.registerForm.value;
+        }
     //     this.authService.register(this.registerForm.value).subscribe({
     // });
   }

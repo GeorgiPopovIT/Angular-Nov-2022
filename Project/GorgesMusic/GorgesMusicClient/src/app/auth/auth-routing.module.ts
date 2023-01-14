@@ -10,7 +10,7 @@ const routes : Routes = [
         data: {
             title : 'Login',
             loginRequired : false
-             }   
+            }   
         },
         {
             path : 'register',

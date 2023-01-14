@@ -14,6 +14,7 @@ import { LogoutComponent } from './logout/logout.component';
     RegisterComponent,
     LogoutComponent
   ],
+  providers :[FormBuilder],
   imports: [
     CommonModule,
     AuthRoutingModule,

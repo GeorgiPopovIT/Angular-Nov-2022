@@ -29,6 +29,7 @@ public class SongController : ControllerBase
     }
 
     [HttpGet]
+    [ResponseCache(Duration = 60 * 5)]
     public async Task<ActionResult<IEnumerable<SongViewModel>>> GetAllSongs(CancellationToken cancellationToken)
     {
         var songs = await this._songService.GetAllAsync(cancellationToken);
