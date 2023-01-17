@@ -29,14 +29,14 @@ public class SongController : ControllerBase
     }
 
     [HttpGet]
-    [ResponseCache(Duration = 60 * 5)]
+    [ResponseCache(Duration = 60 * 5, Location = ResponseCacheLocation.None)]
     public async Task<ActionResult<IEnumerable<SongViewModel>>> GetAllSongs(CancellationToken cancellationToken)
     {
         var songs = await this._songService.GetAllAsync(cancellationToken);
 
         if (songs is null)
         {
-            return BadRequest();
+            return BadRequest("Songs are null.");
         }
 
         return Ok(songs);

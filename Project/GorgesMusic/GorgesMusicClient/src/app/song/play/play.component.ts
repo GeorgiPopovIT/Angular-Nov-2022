@@ -11,33 +11,34 @@ import { switchMap, tap } from 'rxjs';
 })
 export class PlayComponent implements OnInit {
 
-  public song! : Song ;
+  //public song! : Song;
+  public song : any;
 
   constructor(private songService : SongService,private route : ActivatedRoute)
    { }
   
   ngOnInit(): void {
-    // this.route.params.subscribe(({id}) => {
-    //   this.song = null;
-    //   this.loadSong(id);
-    // });
+    this.route.params.subscribe(({id}) => {
+       this.song = null;
+      this.loadSong(id);
+    });
 
-    this.route.params.pipe(
-      tap(() => this.song == null),
-      switchMap(({id}) => this.songService.getSongById(id))
-        ).subscribe( song => {
-          this.song = song;
-          });
+    // this.route.params.pipe(
+    //   tap(() => this.song == null),
+    //   switchMap(({id}) => this.songService.getSongById(id)))
+    //   .subscribe( song => {
+    //       this.song = song;
+    //     });
   }
 
-  // loadSong(id : number) : void{
-  //   this.songService.getSongById(id).subscribe({
-  //     next :(value) => {
-  //       this.song = value;
-  //     },
-  //     error: (Response) => {
-  //       console.log(Response);
-  //     }
-  //   });
-  // }
+  loadSong(id : number) : void{
+    this.songService.getSongById(id).subscribe({
+      next :(value) => {
+        this.song = value;
+      },
+      error: (Response) => {
+        console.log(Response);
+      }
+    });
+  }
 }

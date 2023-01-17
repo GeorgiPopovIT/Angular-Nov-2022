@@ -2,14 +2,19 @@
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './auth/register/register.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { HomeComponent } from './home/home.component';
 import { ListComponent } from './song/list/list.component';
 import { PlayComponent } from './song/play/play.component';
 
 const routes: Routes = [
   {
-    path : ' ',
+    path : '',
     pathMatch: 'full',  
-    component : ListComponent,
+    redirectTo: ''
+  },
+  {
+    path: '',
+    component: HomeComponent
   },
   {
     path : 'auth/register',
@@ -24,9 +29,13 @@ const routes: Routes = [
     component : PlayComponent
   },
   {
-    path : '**',
+    path: 'not-found',
     component: PageNotFoundComponent
   },
+  {
+    path : '**',
+    redirectTo: '/not-found'
+  }
 ];
 
 // @NgModule({
