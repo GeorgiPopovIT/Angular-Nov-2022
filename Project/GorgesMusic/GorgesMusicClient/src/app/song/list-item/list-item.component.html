@@ -1,0 +1,18 @@
+<div class="col-md-3">
+    <div class="card" style="width: 11rem;">
+      <input type="hidden" id="{{song.id}}">
+        <img src="{{song.imageLink}}" class="card-img-top" alt="Img">
+        <div class="card-body">
+        <h6 class="card-title row">{{song.name}}</h6>
+        <a [routerLink]="['/song',song.id]" class="btn btn-primary"><i class="bi bi-play"></i>Play</a>
+        <div class="btn-group">
+          <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Options
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+          </div>
+        </div>
+       </div>
+    </div>
+</div>

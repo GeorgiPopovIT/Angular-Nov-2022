@@ -1,39 +1,29 @@
 // import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from './auth/register/register.component';
+import { MainComponent } from './core/main/main.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
-import { HomeComponent } from './home/home.component';
-import { ListComponent } from './song/list/list.component';
 import { PlayComponent } from './song/play/play.component';
 
 const routes: Routes = [
   {
-    path : '',
-    pathMatch: 'full',  
-    redirectTo: ''
-  },
-  {
     path: '',
-    component: HomeComponent
-  },
-  {
-    path : 'auth/register',
-    component : RegisterComponent
-  },
-  {
-    path : 'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
-  },
-  {
-    path: 'song/:id',
-    component : PlayComponent
+    component: MainComponent,
+    pathMatch : 'full'
   },
   {
     path: 'not-found',
     component: PageNotFoundComponent
   },
   {
-    path : '**',
+    path : 'song/:id',
+    component: PlayComponent
+  },
+  {
+    path : 'auth',
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: '**',
     redirectTo: '/not-found'
   }
 ];

@@ -28,6 +28,10 @@ export class ListComponent implements OnInit {
     });
   }
 
+  playSong(id : number){
+    
+  }
+
   listSongOnChange(event : any){
     this.listSize = event.target.value;
     this.page = event;

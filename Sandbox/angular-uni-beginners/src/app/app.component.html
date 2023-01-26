@@ -1,0 +1,7 @@
+<h1>Welcome to {{title}}</h1>
+
+<input (keyup)="onKeyUp(titleInput.value)" [value]="title" #titleInput>
+
+<div>
+ <app-test (click)="someChangeApp($event)" [word]="title"></app-test>
+</div>

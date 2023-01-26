@@ -1,27 +1,10 @@
 <div class="row">
-  <div *ngFor="let song of songs | paginate: {itemsPerPage : listSize, currentPage : page}" class="col-3 col-sm-3 col-md-3 col-lg-3">
-    <div class="col-md-3">
-        <div class="card" style="width: 11rem;">
-          <input type="hidden" id="{{song.id}}">
-            <img src="{{song.imageLink}}" class="card-img-top" alt="Img">
-            <div class="card-body">
-            <h6 class="card-title row">{{song.name}}</h6>
-            <a [routerLink]="['song',song.id]" class="btn btn-primary"><i class="bi bi-play"></i>Play</a>
-            <div class="btn-group">
-              <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Options
-              </button>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-              </div>
-            </div>
-           </div>
-        </div>
-    </div>
+  <div *ngFor="let currentSong of songs | paginate: {itemsPerPage : listSize, currentPage : page}" class="col-3 col-sm-3 col-md-3 col-lg-3">
+    <app-list-item [song]="currentSong"></app-list-item>
   </div>
 </div>
 <pagination-controls (pageChange)="page = $event"></pagination-controls>
 
-  <div *ngIf="!songs">
-    <mat-spinner></mat-spinner>
-  </div>
+<div *ngIf="!songs">
+  <mat-spinner></mat-spinner>
+</div>

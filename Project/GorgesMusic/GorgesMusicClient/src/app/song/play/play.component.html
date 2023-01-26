@@ -1,27 +1,3 @@
-<!-- <div class="audio-player">
-    <div id="play-btn">
-        <ng-template >
-            <i class="bi bi-play"></i>
-        </ng-template>
-        <ng-template #isPaused>
-            <i class="bi bi-pause"></i>
-        </ng-template>
-    </div>  
-    <div class="audio-wrapper" id="player-container" href="javascript:;">
-      <audio id="player" ontimeupdate="initProgressBar()">
-       <source src="{{song.audioLink}}" type="audio/mp3">
-      </audio>
-    </div>
-    <div class="player-controls scrubber">
-      <p>{{song.name}}</p>
-      <span id="seek-obj-container">
-        <progress id="seek-obj" value="0" max="1"></progress>
-      </span>
-      <small style="float: left; position: relative; left: 15px;" id="start-time"></small>
-      <small style="float: right; position: relative; right: 20px;" id="end-time"></small>
-    </div>
-    <div class="album-image" style="background-image: url({{song.imageLink}})"></div>
-  </div> -->
   <!-- <ng-container #vc> -->
     <div *ngIf="song">
       <audio controls autoplay>

@@ -7,13 +7,15 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { PlayComponent } from './play/play.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { ListItemComponent } from './list-item/list-item.component';
 
 
 
 @NgModule({
   declarations: [
     ListComponent,
-    PlayComponent
+    PlayComponent,
+    ListItemComponent
   ],
   imports: [
     CommonModule,
