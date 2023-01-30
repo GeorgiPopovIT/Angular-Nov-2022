@@ -11,6 +11,8 @@ export class ListComponent implements OnInit {
     public songs! : Song[];
     page : number = 1;
     listSize : number = 16;
+
+    public song! : Song;
    
     constructor(private songService : SongService) { }
 
@@ -28,8 +30,11 @@ export class ListComponent implements OnInit {
     });
   }
 
-  playSong(id : number){
-    
+  songPlayingHandler(currSong : Song){
+    this.song = currSong;
+
+    console.log('song to play + song audio');
+    console.log(this.song != null);
   }
 
   listSongOnChange(event : any){

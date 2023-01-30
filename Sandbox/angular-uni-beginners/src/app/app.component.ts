@@ -14,4 +14,12 @@ export class AppComponent {
   someChangeApp(word : any){
     console.log('app component');
   }
+  h2Classes(){
+    return{
+      'test' : true
+    };
+  }
+  h2Styles(){
+    return {'background' : 'cyan'}
+  }
 }

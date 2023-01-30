@@ -1,41 +1,27 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { SongService } from 'src/app/services/song.service';
 import { Song } from 'src/app/shared/interfaces/song';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.css']
 })
-export class PlayComponent implements OnInit {
+export class PlayComponent implements OnChanges, OnInit {
 
-  public song : any;
+  @Input()
+  public song! : Song;
 
   constructor(private songService : SongService,private route : ActivatedRoute)
    {}
-  
+   
   ngOnInit(): void {
-    this.route.params.subscribe(({id}) => {
-       this.song = null;
-      this.loadSong(id);
-    });
-    // this.song = this.route.params.pipe(
-    //   switchMap(params => {
-    //     return this.songService.getSongById(Number(params['get']('id')));
-    //   })
-    // );
-    // this.route.params.pipe(
-    //   tap(() => this.song == null),
-    //   switchMap(({id}) => this.songService.getSongById(id)))
-    //   .subscribe( song => {
-    //       this.song = song;
-    //     });
+    this.loadSong(this.song.id);
   }
-
-  playSong(id : number){
-    this.loadSong(id);
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    this.loadSong(changes['song'].currentValue.id);
   }
 
   loadSong(id : number) : void{

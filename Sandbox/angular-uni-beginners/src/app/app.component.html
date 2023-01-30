@@ -1,7 +1,13 @@
-<h1>Welcome to {{title}}</h1>
+<h1 [ngClass]="h2Classes()" [ngStyle]="h2Styles()">Welcome to {{title}}</h1>
 
 <input (keyup)="onKeyUp(titleInput.value)" [value]="title" #titleInput>
 
 <div>
  <app-test (click)="someChangeApp($event)" [word]="title"></app-test>
+</div>
+
+<div [ngSwitch]="titleInput.value">
+    <p *ngSwitchCase="'angular'">First case - angular</p>
+    <p *ngSwitchCase="'.net'">Second case - .net</p>
+    <p *ngSwitchDefault>Third case - default</p>
 </div>

@@ -1,7 +1,8 @@
-<p>test works!</p>
-
 <div>
-    <h2>{{word}}</h2>
+    <h2 *ngIf="word; else noWord">{{word}}</h2>
+    <ng-template #noWord>
+        <p>No word</p>
+    </ng-template>
     <button (click)="someChangeTest()">
         Some Change
     </button>
