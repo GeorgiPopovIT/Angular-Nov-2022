@@ -2,6 +2,7 @@
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './core/main/main.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { ListComponent } from './song/list/list.component';
 import { PlayComponent } from './song/play/play.component';
 
 const routes: Routes = [
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'not-found',
     component: PageNotFoundComponent
+  },
+  {
+    path: 'song/list',
+    component : MainComponent
   },
   {
     path : 'song/:id',

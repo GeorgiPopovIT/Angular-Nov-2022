@@ -17,21 +17,23 @@
           <span class="text-danger" *ngIf="registerForm.get('username')?.errors?.['minlength']">Username must be at least 5 characters!</span>
         </ng-container>
     </div>
+    <ng-container formGroupName="pass">
     <div class="form-group">
       <label for="password">Password</label>
       <input id="password" formControlName="password" type="password" class="form-control" placeholder="Password">
-      <ng-container  *ngIf="registerForm.get('pass')?.get('password')?.touched">
+      <ng-container *ngIf="registerForm.get('pass')?.get('password')?.touched">
         <span class="text-danger" *ngIf="registerForm.get('pass')?.get('password')?.errors?.['required']">Password is required!</span>
+        <span class="text-danger" *ngIf="registerForm.get('pass')?.get('password')?.errors?.['minlength']">Password must be at least 5 characters!</span>
       </ng-container>
     </div>
     <div class="form-group">
         <label for="confirmPassword">Confirm Password</label>
         <input formControlName="confirmPassword" type="password" class="form-control" placeholder="Confirm password">
-        <ng-container *ngIf="registerForm.get('confirmPassword')?.touched">
-          <span class="text-danger" *ngIf="registerForm.get('pass')?.errors?.['required']">Confirming password is required!</span>
-          <span class="text-danger" *ngIf="registerForm.get('pass')?.errors?.['sameValueGroupValidator']">Repeat Password does not match password!</span>
-        </ng-container>
-      </div>
-    <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Submit</button>
+          <span class="text-danger" *ngIf="registerForm.get('pass')?.errors?.['sameValueGroupValidator']
+           && registerForm.get('pass')?.get('confirmPassword')?.touched">Repeat password does not match password!</span>
+    </div>
+
+    </ng-container>
+    <button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Submit</button> 
   </form>
 </div>

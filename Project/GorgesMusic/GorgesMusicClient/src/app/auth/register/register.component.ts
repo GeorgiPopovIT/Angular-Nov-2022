@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Form, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { twoPasswordGroupValidator } from 'src/app/shared/validators/passwordGroup.validator';
 
@@ -10,28 +11,25 @@ import { twoPasswordGroupValidator } from 'src/app/shared/validators/passwordGro
 })
 export class RegisterComponent  {
 
-  registerForm : FormGroup; 
-
-  constructor(private fb : FormBuilder, private authService : AuthService){
-    this.registerForm =  this.fb.group({
-      email : ['',Validators.required,Validators.email],
-      username : ['',Validators.required,Validators.maxLength(100),Validators.minLength(5)],
-      pass: this.fb.group({
-        password: ['', [Validators.required, Validators.minLength(5)]],
-        confirmPassword: []
-      }, {
-        validators: [twoPasswordGroupValidator('password', 'confirmPassword')]
-      })
-    });
-   }
+  registerForm =  this.fb.group({
+    email : ['',Validators.required,Validators.email],
+    username : ['',Validators.required,Validators.maxLength(100),Validators.minLength(5)],
+    pass: this.fb.group({
+      password: ['', [Validators.required, Validators.minLength(5)]],
+      confirmPassword: []
+    }, {
+      validators: [twoPasswordGroupValidator('password', 'confirmPassword')]
+    })
+  });
+  constructor(private fb : FormBuilder, private authService : AuthService, private router: Router) { }
 
       register() : void {
         if(this.registerForm.invalid){
           return;
         }
 
-        this.authService.register(this.registerForm.value).subscribe(data =>{
-          
+        this.authService.register(this.registerForm.value).subscribe(data => {
+          this.router.navigate(['/song/list']);
         });
   }
 
