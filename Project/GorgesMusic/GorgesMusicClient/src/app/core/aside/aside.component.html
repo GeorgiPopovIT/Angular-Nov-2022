@@ -7,11 +7,15 @@
         <li class="active">
             <a routerLink="/">Homepage</a>
         </li>
-        <li>
+        <li *ngIf="!isLogged()">
             <a routerLink="/auth/register">Register</a>
         </li>
-        <li>
+        <li *ngIf="!isLogged()">
             <a routerLink="/auth/login">Login</a>
         </li>
+        <li *ngIf="isLogged()">
+            <a routerLink="/auth/logout">Logout</a>
+        </li>
     </ul>
+    <ng-template></ng-template>
 </nav>

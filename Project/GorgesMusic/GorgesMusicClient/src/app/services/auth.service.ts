@@ -19,6 +19,7 @@ export class AuthService {
   }
 
   register(data : any) : Observable<any>{
+    console.log(data);
     return this.httpClient.post(this.registerPath,data);
   }
 
@@ -32,5 +33,8 @@ export class AuthService {
 
   logOut() : void {
      localStorage.removeItem('token');
+  }
+  get isLoggedIn() {
+    return this.getToken;
   }
 }

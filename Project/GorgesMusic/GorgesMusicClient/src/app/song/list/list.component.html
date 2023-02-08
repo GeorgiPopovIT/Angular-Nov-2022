@@ -1,4 +1,4 @@
-<div class="row">
+<div *ngIf="songs$ | async as songs" class="row">
   <div *ngFor="let currentSong of songs | paginate: {itemsPerPage : listSize, currentPage : page}" class="col-3 col-sm-3 col-md-3 col-lg-3">
     <app-list-item [song]="currentSong" (songId)="songPlayingHandler($event)"></app-list-item>
   </div>

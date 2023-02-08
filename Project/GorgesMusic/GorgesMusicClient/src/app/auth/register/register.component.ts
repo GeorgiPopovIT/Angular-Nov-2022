@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { Form, FormBuilder, FormControl, NgForm, Validators } from '@angular/forms';
+import { Form, FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { twoPasswordGroupValidator } from 'src/app/shared/validators/passwordGroup.validator';
 
 @Component({
   selector: 'app-register',
@@ -9,21 +10,29 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RegisterComponent  {
 
-  registerForm =  this.fb.group({
-      'email' : ['',Validators.required,Validators.email],
-      'username' : ['',Validators.required,Validators.maxLength(100)],
-      'password' : ['',Validators.required, Validators.minLength(5)]
-    });
+  registerForm : FormGroup; 
 
-  constructor(private fb : FormBuilder, private authService : AuthService){ 
-      
+  constructor(private fb : FormBuilder, private authService : AuthService){
+    this.registerForm =  this.fb.group({
+      email : ['',Validators.required,Validators.email],
+      username : ['',Validators.required,Validators.maxLength(100),Validators.minLength(5)],
+      pass: this.fb.group({
+        password: ['', [Validators.required, Validators.minLength(5)]],
+        confirmPassword: []
+      }, {
+        validators: [twoPasswordGroupValidator('password', 'confirmPassword')]
+      })
+    });
    }
-      registerFormSubmit() : void {
+
+      register() : void {
         if(this.registerForm.invalid){
-          const {email,username, password} = this.registerForm.value;
+          return;
         }
-    //     this.authService.register(this.registerForm.value).subscribe({
-    // });
+
+        this.authService.register(this.registerForm.value).subscribe(data =>{
+          
+        });
   }
 
 }

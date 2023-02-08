@@ -22,6 +22,7 @@ public class IdentityController : ControllerBase
         this._jwtSettings = jwtSettings;
     }
 
+    [HttpPost]
     [Route(nameof(Register))]
     public async Task<ActionResult> Register(RegisterRequestModel model)
     {
