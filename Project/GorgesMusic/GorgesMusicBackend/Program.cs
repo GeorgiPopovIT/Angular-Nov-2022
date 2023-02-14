@@ -8,6 +8,7 @@ using GorgesMusic.Data.Seed;
 using GorgesMusicBackend;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
@@ -39,11 +40,10 @@ builder.Services.AddDefaultIdentity<User>(options =>
 Cloudinary cloudinary = new Cloudinary(account);
 //cloudinary.Api.Secure = true;
 
-var jwtSettingsConfiguration = builder.Configuration.GetSection("JwtSetting");
+var jwtSettingsConfiguration = builder.Configuration.GetSection("JwtSettings");
 builder.Services.Configure<JwtSettings>(jwtSettingsConfiguration);
 
 var jwtSettings = jwtSettingsConfiguration.Get<JwtSettings>();
-var key = Encoding.ASCII.GetBytes(jwtSettings.Secret);
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -53,10 +53,12 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.SaveToken = true;
         options.TokenValidationParameters = new TokenValidationParameters
         {
+            ValidIssuer = "Grp",
+            ValidAudience  ="Grp",
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(key),
-            ValidateIssuer = false,
-            ValidateAudience = false
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret)),
+            ValidateIssuer = true,
+            ValidateAudience = true 
         };
     });
 

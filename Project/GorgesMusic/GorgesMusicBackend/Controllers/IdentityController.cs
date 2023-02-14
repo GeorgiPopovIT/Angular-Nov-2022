@@ -4,6 +4,7 @@ using GorgesMusic.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using NuGet.Protocol;
 
 namespace GorgesMusicBackend.Controllers;
 
@@ -32,19 +33,21 @@ public class IdentityController : ControllerBase
             Email = model.Email
         };
 
-        var result = await this._userManager.CreateAsync(user, model.Password);
-
-        if (result.Succeeded)
+        //var result = await this._userManager.CreateAsync(user, model.Password);
+        if (true)
         {
+
             return Ok();
         }
 
-        return BadRequest(result.Errors);
+        //return BadRequest(result.Errors);
+
+        return BadRequest();
     }
 
     [HttpPost]
     [Route(nameof(Login))]
-    public async Task<ActionResult<string>> Login([FromBody]LoginRequestModel model)
+    public async Task<ActionResult<string>> Login([FromBody] LoginRequestModel model)
     {
 
         var user = await this._userManager.FindByNameAsync(model.Username);
@@ -59,8 +62,8 @@ public class IdentityController : ControllerBase
         {
             return Unauthorized();
         }
-        var token = this._userService.GenerateJwtToken(user.Id, user.UserName, this._jwtSettings.Value.Secret);
+        var token = this._userService.GenerateJwtToken(user, this._jwtSettings.Value.Secret);
 
-        return Ok(token);
+        return Ok(token.ToJson());
     }
 }

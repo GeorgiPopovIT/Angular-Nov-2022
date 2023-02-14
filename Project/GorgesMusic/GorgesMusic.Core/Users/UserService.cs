@@ -18,23 +18,25 @@ public class UserService : IUserService
         _userManager = userManager;
     }
 
-    public string GenerateJwtToken(string userId, string username,string secret)
+    public string GenerateJwtToken(User user,string secret)
     {
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(secret);
+        var key = Encoding.UTF8.GetBytes(secret);
 
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[]
             {
-               new Claim(ClaimTypes.NameIdentifier, userId),
-               new Claim(ClaimTypes.Name, username)
+               new Claim(ClaimTypes.Name, user.Id),
              }),
             Expires = DateTime.UtcNow.AddMinutes(5),
+            Issuer = "Grp",
+            Audience = "Grp",
             SigningCredentials = new SigningCredentials
             (new SymmetricSecurityKey(key),
-            SecurityAlgorithms.HmacSha512Signature)
+            SecurityAlgorithms.HmacSha256Signature)
         };
+
+        var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.CreateToken(tokenDescriptor);
         var jwtToken = tokenHandler.WriteToken(token);
 

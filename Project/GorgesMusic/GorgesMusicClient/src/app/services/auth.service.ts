@@ -19,7 +19,6 @@ export class AuthService {
   }
 
   register(data : any) : Observable<any>{
-    console.log(data);
     return this.httpClient.post(this.registerPath,data);
   }
 
