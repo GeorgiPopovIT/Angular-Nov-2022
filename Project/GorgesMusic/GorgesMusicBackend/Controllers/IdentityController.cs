@@ -42,7 +42,6 @@ public class IdentityController : ControllerBase
 
         //return BadRequest(result.Errors);
 
-        return BadRequest();
     }
 
     [HttpPost]
@@ -64,6 +63,6 @@ public class IdentityController : ControllerBase
         }
         var token = this._userService.GenerateJwtToken(user, this._jwtSettings.Value.Secret);
 
-        return Ok(token.ToJson());
+        return Ok(new JwtSettings { Secret = token});
     }
 }
