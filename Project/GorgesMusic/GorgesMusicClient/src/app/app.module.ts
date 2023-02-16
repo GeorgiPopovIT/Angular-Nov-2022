@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SongModule } from './song/song.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthRoutingModule } from './auth/auth-routing.module';
 
 @NgModule({
     declarations: [
@@ -22,7 +23,8 @@ import { AppRoutingModule } from './app-routing.module';
         NgbModule,
         SongModule,
         RouterModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        AuthRoutingModule
     ]
 })
 export class AppModule { }

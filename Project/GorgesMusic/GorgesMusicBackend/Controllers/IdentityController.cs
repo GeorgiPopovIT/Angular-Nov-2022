@@ -13,14 +13,14 @@ namespace GorgesMusicBackend.Controllers;
 public class IdentityController : ControllerBase
 {
     private readonly IUserService _userService;
-    private readonly IOptions<JwtSettings> _jwtSettings;
+    private readonly JwtSettings _jwtSettings;
     private readonly UserManager<User> _userManager;
 
     public IdentityController(IUserService userService, UserManager<User> userManager, IOptions<JwtSettings> jwtSettings)
     {
         this._userService = userService;
         this._userManager = userManager;
-        this._jwtSettings = jwtSettings;
+        this._jwtSettings = jwtSettings.Value;
     }
 
     [HttpPost]
@@ -61,7 +61,7 @@ public class IdentityController : ControllerBase
         {
             return Unauthorized();
         }
-        var token = this._userService.GenerateJwtToken(user, this._jwtSettings.Value.Secret);
+        var token = this._userService.GenerateJwtToken(user, this._jwtSettings.Secret);
 
         return Ok(new JwtSettings { Secret = token});
     }

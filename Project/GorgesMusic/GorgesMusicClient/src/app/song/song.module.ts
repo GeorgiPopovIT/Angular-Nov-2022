@@ -8,6 +8,7 @@ import { PlayComponent } from './play/play.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ListItemComponent } from './list-item/list-item.component';
+import { AddNewSongComponent } from './add-new-song/add-new-song.component';
 
 
 
@@ -15,7 +16,8 @@ import { ListItemComponent } from './list-item/list-item.component';
   declarations: [
     ListComponent,
     PlayComponent,
-    ListItemComponent
+    ListItemComponent,
+    AddNewSongComponent
   ],
   imports: [
     CommonModule,

@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   loginSubmit(){
     this.authService.login(this.loginForm.value).subscribe (data => {
-      console.log(data);
+      console.log(data['secret']);
       this.authService.saveToken(data['secret']);
       this.router.navigate(['/song/list']);
     });
