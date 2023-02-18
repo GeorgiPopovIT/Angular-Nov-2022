@@ -3,22 +3,25 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Song } from '../shared/interfaces/song';
-
-const baseApiUrl = environment.apiURL;
-
+import { SongInputModel } from '../shared/interfaces/songInputModel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SongService {
+  private songPath = environment.apiURL + '/api/song';
+
   constructor(private httpClient : HttpClient) { }
 
   getAllSongs() : Observable<Song[]>{
-      return this.httpClient.get<Song[]>(baseApiUrl +'/api/song');
+      return this.httpClient.get<Song[]>(this.songPath);
   }
   
   getSongById(id : number) : Observable<Song>{
-    return this.httpClient.get<Song>(baseApiUrl + `/api/song/${id}`)
+    return this.httpClient.get<Song>(this.songPath + `/${id}`)
+  }
+  createSong(song : SongInputModel) : Observable<Song>{
+    return this.httpClient.post<Song>(this.songPath + `/create`);
   }
 
   // playAudio(mp3Url : string){

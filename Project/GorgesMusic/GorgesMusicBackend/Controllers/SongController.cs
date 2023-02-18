@@ -43,15 +43,17 @@ public class SongController : ControllerBase
     }
 
     [HttpPost]
-    public ActionResult<SongInputModel> CreateSong(SongInputModel input, CancellationToken cancellationToken)
+    [Route("create")]
+    public ActionResult<SongInputModel> Create([FromForm]SongInputModel input)
     {
-        if (input.File is null)
-        {
-            return NotFound();
-        }
+        ;
+        //if (input.File is null)
+        //{
+        //    return NotFound();
+        //}
 
-
-        return CreatedAtAction(nameof(GetSong), new { id = input.Id });
+        return null;
+       // return CreatedAtAction(nameof(GetSong), new { id = input.Id });
     }
 
     [HttpPut("id")]

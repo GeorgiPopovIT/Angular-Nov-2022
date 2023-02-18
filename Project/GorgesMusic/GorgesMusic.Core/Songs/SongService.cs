@@ -29,7 +29,8 @@ public class SongService : ISongService
         var song = new Song
         {
             Name = input.Name,
-            Genre = input.Genre,
+            //Genre = input.Genre,
+            CardImage = input.Image,
             AudioLink = cloudinaryFileUrl
         };
 
@@ -39,15 +40,15 @@ public class SongService : ISongService
 
     public async Task UpdateSongAsync(SongInputModel input)
     {
-        var currentSong = await this._dbContext.Songs.FindAsync(input.Id);
+        var currentSong = await this._dbContext.Songs.FindAsync("");
 
         if (currentSong is null)
         {
-            throw new InvalidOperationException("This is song is not avaliable.");
+            throw new ArgumentNullException("This is song is not avaliable.");
         }
 
         currentSong.Name = input.Name;
-        currentSong.Genre = input.Genre;
+        //currentSong.Genre = input.Genre;
 
         await this._dbContext.SaveChangesAsync();
 

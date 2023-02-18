@@ -8,7 +8,7 @@ public class Song : BaseModel
 {
     [Required]
     [Unicode(true)] 
-    //[MaxLength(SongConstants.SongNameMaxLength)]
+    [MaxLength(SongConstants.SongNameMaxLength)]
     public string? Name { get; set; }
 
     public string? CardImage { get; set; }

@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ListItemComponent } from './list-item/list-item.component';
 import { AddNewSongComponent } from './add-new-song/add-new-song.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,12 +22,14 @@ import { AddNewSongComponent } from './add-new-song/add-new-song.component';
   ],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     NgbPaginationModule,
     MatProgressSpinnerModule,
     NgxPaginationModule,
     HttpClientModule,
     RouterModule
   ],
-  exports:[ListComponent,PlayComponent]
+  exports:[ListComponent,PlayComponent,AddNewSongComponent]
 })
 export class SongModule { }
