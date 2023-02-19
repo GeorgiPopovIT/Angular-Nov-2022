@@ -44,13 +44,18 @@ public class SongController : ControllerBase
 
     [HttpPost]
     [Route("create")]
-    public ActionResult<SongInputModel> Create([FromForm]SongInputModel input)
+    public async Task<ActionResult<SongInputModel>> Create([FromForm]SongInputModel input, CancellationToken cancellationToken)
     {
-        ;
-        //if (input.File is null)
-        //{
-        //    return NotFound();
-        //}
+        try
+        {
+            await this._songService.CreateSongAsync(input);
+
+        }
+        catch (Exception e)
+        {
+
+            return BadRequest(e.Message);
+        }
 
         return null;
        // return CreatedAtAction(nameof(GetSong), new { id = input.Id });

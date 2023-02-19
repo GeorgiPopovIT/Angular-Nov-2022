@@ -8,7 +8,7 @@ public interface ISongService
 
     Task<SongViewModel> GetSongByIdAsync(int id, CancellationToken cancellationToken);
 
-    Task CreateSong(SongInputModel input);
+    Task CreateSongAsync(SongInputModel input);
 
     Task UpdateSongAsync(SongInputModel input);
 

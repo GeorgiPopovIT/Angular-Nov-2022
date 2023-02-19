@@ -20,8 +20,8 @@ export class SongService {
   getSongById(id : number) : Observable<Song>{
     return this.httpClient.get<Song>(this.songPath + `/${id}`)
   }
-  createSong(song : SongInputModel) : Observable<Song>{
-    return this.httpClient.post<Song>(this.songPath + `/create`);
+  createSong(song : SongInputModel) : Observable{
+    return this.httpClient.post<Song>(this.songPath + `/create`,song);
   }
 
   // playAudio(mp3Url : string){

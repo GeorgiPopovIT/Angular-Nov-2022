@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { SongService } from 'src/app/services/song.service';
+import { SongInputModel } from 'src/app/shared/interfaces/songInputModel';
 
 
 @Component({
@@ -15,9 +17,30 @@ export class AddNewSongComponent implements OnInit {
     audioLink : ['',,Validators.required]
   });
 
-  constructor(private fb : FormBuilder) {}
-
+  constructor(private fb : FormBuilder, private songService : SongService) {}
+ 
   ngOnInit(): void {
+  }
+
+  addSongSubmit(){
+    if(!this.newSongForm.valid){
+      return;
+    }
+
+    const formValue = this.newSongForm.value;
+
+
+    const songToAdd : SongInputModel = {
+      name : formValue.name!,
+      genre : formValue.genre!,
+      imageLink : formValue.imageLink!,
+      audioLink : formValue.audioLink!
+    };
+    this.songService.createSong(songToAdd).subscribe({
+     error : (Response) => {
+      console.log(Response);
+     }
+    });
   }
 
 }

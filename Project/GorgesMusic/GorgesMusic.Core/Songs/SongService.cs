@@ -17,14 +17,14 @@ public class SongService : ISongService
         this._fileService = fileService;
     }
 
-    public async Task CreateSong(SongInputModel input)
+    public async Task CreateSongAsync(SongInputModel input)
     {
         if (input is null)
         {
             throw new ArgumentNullException("Input is null.");
         }
 
-        var cloudinaryFileUrl = await this._fileService.UploadFileAsync(input.File);
+        var cloudinaryFileUrl = await this._fileService.UploadFileAsync(input.SongAudio);
 
         var song = new Song
         {
