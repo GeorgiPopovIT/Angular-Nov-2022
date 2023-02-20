@@ -71,6 +71,16 @@ public class SongService : ISongService
 
     }
 
+    public async Task<IEnumerable<SongViewModel>> GetLast5AddedSongs(CancellationToken cancellationToken)
+         => await this._dbContext.Songs.Select(s => new SongViewModel
+         {
+             Id = s.Id,
+             Name = s.Name,
+             ImageLink = s.CardImage,
+             AudioLink = s.AudioLink,
+             CreatedOn = s.CreatedOn
+         }).OrderByDescending(s => s.CreatedOn).Take(5).ToListAsync();
+
     public async Task<IEnumerable<SongViewModel>> GetAllAsync(CancellationToken cancellationToken)
         => await this._dbContext.Songs.Select(s => new SongViewModel
         {
@@ -78,7 +88,7 @@ public class SongService : ISongService
             Name = s.Name,
             ImageLink = s.CardImage,
             AudioLink = s.AudioLink
-        }).ToListAsync();
+        }).OrderBy(s => Guid.NewGuid()).ToListAsync();
 
     public async Task<SongViewModel> GetSongByIdAsync(int id, CancellationToken cancellationToken)
         => await this._dbContext.Songs.Select(s => new SongViewModel

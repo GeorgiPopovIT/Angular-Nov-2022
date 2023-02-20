@@ -1,6 +1,6 @@
 <div class="container">
     <h1>Create song</h1>
-    <form [formGroup]="newSongForm" method="post">
+    <form [formGroup]="newSongForm" (ngSubmit)="addSongSubmit()" method="post">
         
       <div class="col-md-4 offset-md-4">
         <div class="form-group">

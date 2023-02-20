@@ -27,14 +27,14 @@ export class AddNewSongComponent implements OnInit {
       return;
     }
 
-    const formValue = this.newSongForm.value;
+    const {name, genre, imageLink, audioLink} = this.newSongForm.value;
 
 
     const songToAdd : SongInputModel = {
-      name : formValue.name!,
-      genre : formValue.genre!,
-      imageLink : formValue.imageLink!,
-      audioLink : formValue.audioLink!
+      name : name!,
+      genre : genre!,
+      imageLink : imageLink!,
+      audioLink : audioLink!
     };
     this.songService.createSong(songToAdd).subscribe({
      error : (Response) => {

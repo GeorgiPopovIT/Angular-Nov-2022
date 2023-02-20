@@ -14,6 +14,19 @@ public class SongController : ControllerBase
     {
         _songService = songService;
     }
+    [HttpGet]
+    [Route("lastSongs")]
+    public async Task<ActionResult<IEnumerable<SongViewModel>>> GetLast5Songs(CancellationToken cancellationToken)
+    {
+        var lastSongs = await this._songService.GetLast5AddedSongs(cancellationToken);
+
+        if (lastSongs is null)
+        {
+            return BadRequest("Songs are null.");
+        }
+
+        return Ok(lastSongs);
+    }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<SongViewModel>> GetSong(int id, CancellationToken cancellationToken = default)

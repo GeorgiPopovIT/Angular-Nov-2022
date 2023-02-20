@@ -20,7 +20,7 @@ export class SongService {
   getSongById(id : number) : Observable<Song>{
     return this.httpClient.get<Song>(this.songPath + `/${id}`)
   }
-  createSong(song : SongInputModel) : Observable{
+  createSong(song : SongInputModel) : Observable<any>{
     return this.httpClient.post<Song>(this.songPath + `/create`,song);
   }
 
