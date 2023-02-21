@@ -5,16 +5,16 @@ import { SongInputModel } from 'src/app/shared/interfaces/songInputModel';
 
 
 @Component({
-  selector: 'app-add-new-song',
-  templateUrl: './add-new-song.component.html',
-  styleUrls: ['./add-new-song.component.css']
+  selector: 'app-new-song',
+  templateUrl: './new-song.component.html',
+  styleUrls: ['./new-song.component.css']
 })
-export class AddNewSongComponent implements OnInit {
+export class NewSongComponent implements OnInit {
   newSongForm = this.fb.group({
     name : ['',Validators.required],
-    genre : ['',,Validators.required],
-    imageLink : ['',,Validators.required],
-    audioLink : ['',,Validators.required]
+    genre : ['',Validators.required],
+    imageLink : ['',Validators.required],
+    audioLink : ['',Validators.required]
   });
 
   constructor(private fb : FormBuilder, private songService : SongService) {}
@@ -23,7 +23,7 @@ export class AddNewSongComponent implements OnInit {
   }
 
   addSongSubmit(){
-    if(!this.newSongForm.valid){
+    if(this.newSongForm.invalid){
       return;
     }
 
@@ -42,5 +42,4 @@ export class AddNewSongComponent implements OnInit {
      }
     });
   }
-
 }

@@ -8,7 +8,7 @@ import { PlayComponent } from './play/play.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ListItemComponent } from './list-item/list-item.component';
-import { AddNewSongComponent } from './add-new-song/add-new-song.component';
+import { NewSongComponent } from './new-song/new-song.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
@@ -18,18 +18,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ListComponent,
     PlayComponent,
     ListItemComponent,
-    AddNewSongComponent
+    NewSongComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbPaginationModule,
     MatProgressSpinnerModule,
     NgxPaginationModule,
     HttpClientModule,
     RouterModule
   ],
-  exports:[ListComponent,PlayComponent,AddNewSongComponent]
+  exports:[ListComponent,PlayComponent,NewSongComponent]
 })
 export class SongModule { }

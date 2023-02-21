@@ -59,13 +59,16 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true 
         };
     });
+    
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddControllers();
+builder.Services.AddMemoryCache();
 
 builder.Services.AddResponseCaching();
 
+
+builder.Services.AddControllers();
 
 //builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();

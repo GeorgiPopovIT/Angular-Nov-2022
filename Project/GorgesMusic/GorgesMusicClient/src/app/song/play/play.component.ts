@@ -17,11 +17,11 @@ export class PlayComponent implements OnChanges, OnInit {
    {}
    
   ngOnInit(): void {
-    this.loadSong(this.song.id);
+    //this.loadSong(this.song.id);
   }
   
   ngOnChanges(changes: SimpleChanges): void {
-    this.loadSong(changes['song'].currentValue.id);
+    //this.loadSong(changes['song'].currentValue.id);
   }
 
   loadSong(id : number) : void{

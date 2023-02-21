@@ -2,6 +2,7 @@
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './core/main/main.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
+import { NewSongComponent } from './song/new-song/new-song.component';
 import { PlayComponent } from './song/play/play.component';
 
 const routes: Routes = [
@@ -15,8 +16,8 @@ const routes: Routes = [
     component: PageNotFoundComponent
   },
   {
-    path: 'song/list',
-    component : MainComponent
+    path : 'song/create',
+    component : NewSongComponent
   },
   {
     path : 'song/:id',

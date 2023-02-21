@@ -1,6 +1,7 @@
 ﻿using GorgesMusic.Core.Models.Songs;
 using GorgesMusic.Core.Songs;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace GorgesMusicBackend.Controllers;
 
@@ -8,17 +9,29 @@ namespace GorgesMusicBackend.Controllers;
 [Route("api/[controller]")]
 public class SongController : ControllerBase
 {
+    private const string LAST_ADDED_5_SONGS = "Last_Songs";
     private readonly ISongService _songService;
+    private readonly IMemoryCache _memoryCache;
 
-    public SongController(ISongService songService)
+    public SongController(ISongService songService, IMemoryCache memoryCache)
     {
         _songService = songService;
+        this._memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
     }
     [HttpGet]
     [Route("lastSongs")]
     public async Task<ActionResult<IEnumerable<SongViewModel>>> GetLast5Songs(CancellationToken cancellationToken)
     {
-        var lastSongs = await this._songService.GetLast5AddedSongs(cancellationToken);
+        if (!this._memoryCache.TryGetValue(LAST_ADDED_5_SONGS, out var lastSongs))
+        {
+            lastSongs = await this._songService.GetLast5AddedSongs(cancellationToken);
+
+            var cacheEntryOptions = new MemoryCacheEntryOptions()
+           .SetAbsoluteExpiration(TimeSpan.FromSeconds(30));
+
+            _memoryCache.Set(LAST_ADDED_5_SONGS, lastSongs, cacheEntryOptions);
+        }
+        
 
         if (lastSongs is null)
         {
@@ -34,9 +47,9 @@ public class SongController : ControllerBase
         var song = await this._songService.GetSongByIdAsync(id, cancellationToken);
 
         if (song is null)
-        {   
+        {
             return NotFound();
-        }   
+        }
 
         return Ok(song);
     }
@@ -57,11 +70,12 @@ public class SongController : ControllerBase
 
     [HttpPost]
     [Route("create")]
-    public async Task<ActionResult<SongInputModel>> Create([FromForm]SongInputModel input, CancellationToken cancellationToken)
+    public async Task<ActionResult<SongInputModel>> Create([FromForm] SongInputModel input, CancellationToken cancellationToken)
     {
+        var songId = 0;
         try
         {
-            await this._songService.CreateSongAsync(input);
+             songId = await this._songService.CreateSongAsync(input, cancellationToken);
 
         }
         catch (Exception e)
@@ -70,8 +84,7 @@ public class SongController : ControllerBase
             return BadRequest(e.Message);
         }
 
-        return null;
-       // return CreatedAtAction(nameof(GetSong), new { id = input.Id });
+        return CreatedAtAction(nameof(GetSong), new { id = songId });
     }
 
     [HttpPut("id")]

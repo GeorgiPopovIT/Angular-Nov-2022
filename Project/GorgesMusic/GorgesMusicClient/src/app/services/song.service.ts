@@ -24,14 +24,4 @@ export class SongService {
     return this.httpClient.post<Song>(this.songPath + `/create`,song);
   }
 
-  // playAudio(mp3Url : string){
-  //   let audio = new Audio();
-  //   audio.src = mp3Url;
-  //   audio.load();
-  //   audio.play();
-  // }
-
-  // addSongToPlayList() : Observable<Track>{
-    
-  // }
 }

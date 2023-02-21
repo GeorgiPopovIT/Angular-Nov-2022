@@ -17,7 +17,7 @@ public class SongService : ISongService
         this._fileService = fileService;
     }
 
-    public async Task CreateSongAsync(SongInputModel input)
+    public async Task<int> CreateSongAsync(SongInputModel input, CancellationToken cancellationToken)
     {
         if (input is null)
         {
@@ -29,13 +29,15 @@ public class SongService : ISongService
         var song = new Song
         {
             Name = input.Name,
-            //Genre = input.Genre,
+            Genre = input.Genre,
             CardImage = input.Image,
             AudioLink = cloudinaryFileUrl
         };
 
         await this._dbContext.Songs.AddAsync(song);
         await this._dbContext.SaveChangesAsync();
+
+        return song.Id;
     }
 
     public async Task UpdateSongAsync(SongInputModel input)

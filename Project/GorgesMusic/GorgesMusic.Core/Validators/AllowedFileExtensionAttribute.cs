@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GorgesMusic.Core.Validators;
 
-internal class AllowedFileExtensionsAttribute : ValidationAttribute
+internal class AllowedFileExtensionAttribute : ValidationAttribute
 {
     private readonly string[] _extensions;
-    public AllowedFileExtensionsAttribute(string[] extensions)
+    public AllowedFileExtensionAttribute(params string[] extensions)
     {
         this._extensions = extensions;
     }

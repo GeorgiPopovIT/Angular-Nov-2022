@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe (data => {
       console.log(data['secret']);
       this.authService.saveToken(data['secret']);
-      this.router.navigate(['/song/list']);
+      this.router.navigate(['/']);
     });
   }
 }
