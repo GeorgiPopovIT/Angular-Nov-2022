@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SongService } from 'src/app/services/song.service';
-import { SongInputModel } from 'src/app/shared/interfaces/songInputModel';
 
 
 @Component({
@@ -9,34 +9,40 @@ import { SongInputModel } from 'src/app/shared/interfaces/songInputModel';
   templateUrl: './new-song.component.html',
   styleUrls: ['./new-song.component.css']
 })
-export class NewSongComponent implements OnInit {
+export class NewSongComponent  {
   newSongForm = this.fb.group({
     name : ['',Validators.required],
     genre : ['',Validators.required],
     imageLink : ['',Validators.required],
-    audioLink : ['',Validators.required]
+    songAudio : ['',Validators.required]
   });
 
-  constructor(private fb : FormBuilder, private songService : SongService) {}
+  private fileUpload! : File;
+
+  constructor(private fb : FormBuilder, private songService : SongService, private router : Router) {}
  
-  ngOnInit(): void {
+  
+  onFileSelected($event  :any){
+    this.fileUpload = $event.target.files[0];
   }
 
   addSongSubmit(){
     if(this.newSongForm.invalid){
       return;
     }
+    const {name, genre, imageLink} = this.newSongForm.value;
 
-    const {name, genre, imageLink, audioLink} = this.newSongForm.value;
+   const formData = new FormData();
+   formData.append('name', name!);
+   formData.append('genre', genre!);
+   formData.append('imageLink', imageLink!);
+   formData.append('songAudio', this.fileUpload!);
 
 
-    const songToAdd : SongInputModel = {
-      name : name!,
-      genre : genre!,
-      imageLink : imageLink!,
-      audioLink : audioLink!
-    };
-    this.songService.createSong(songToAdd).subscribe({
+    this.songService.createSong(formData).subscribe({
+      next: (value) => {
+        this.router.navigate(['/']);
+      },
      error : (Response) => {
       console.log(Response);
      }

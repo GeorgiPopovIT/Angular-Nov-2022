@@ -23,6 +23,10 @@ public class SongService : ISongService
         {
             throw new ArgumentNullException("Input is null.");
         }
+        else if (this._dbContext.Songs.Any(s => s.Name == input.Name))
+        {
+            throw new ArgumentException("This song already exist.");
+        }
 
         var cloudinaryFileUrl = await this._fileService.UploadFileAsync(input.SongAudio);
 
@@ -30,7 +34,7 @@ public class SongService : ISongService
         {
             Name = input.Name,
             Genre = input.Genre,
-            CardImage = input.Image,
+            CardImage = input.ImageLink,
             AudioLink = cloudinaryFileUrl
         };
 

@@ -24,14 +24,14 @@
             </ng-container>
         </div>
         <div class="form-group">
-            <label for="audioLink">Audio Link</label>
-            <input type="file" formControlName="audioLink" class="form-control" placeholder=" Enter song's audio link">
-            <ng-container *ngIf="newSongForm.get('audioLink')?.touched">
-                <span class="text-danger" *ngIf="newSongForm.get('audioLink')?.errors?.['required']">Song's audio link is required</span>
+            <label for="songAudio">Audio Link</label>
+            <input type="file" (change)="onFileSelected($event)"  formControlName="songAudio" class="form-control" placeholder=" Enter song's audio link">
+            <ng-container *ngIf="newSongForm.get('songAudio')?.touched">
+                <span class="text-danger" *ngIf="newSongForm.get('songAudio')?.errors?.['required']">Song's audio link is required</span>
             </ng-container>
         </div>
 
-        <button class="btn btn-primary" [disabled]="!newSongForm.valid" type="submit">Save</button>
+        <button class="btn btn-primary" [disabled]="newSongForm.invalid" type="submit">Save</button>
 
       </div>
     </form>

@@ -2,6 +2,7 @@
 using GorgesMusic.Core.Songs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using static GorgesMusicBackend.Infrastructure.Constants.Constants.CacheName;
 
 namespace GorgesMusicBackend.Controllers;
 
@@ -9,7 +10,6 @@ namespace GorgesMusicBackend.Controllers;
 [Route("api/[controller]")]
 public class SongController : ControllerBase
 {
-    private const string LAST_ADDED_5_SONGS = "Last_Songs";
     private readonly ISongService _songService;
     private readonly IMemoryCache _memoryCache;
 
@@ -27,11 +27,11 @@ public class SongController : ControllerBase
             lastSongs = await this._songService.GetLast5AddedSongs(cancellationToken);
 
             var cacheEntryOptions = new MemoryCacheEntryOptions()
-           .SetAbsoluteExpiration(TimeSpan.FromSeconds(30));
+           .SetAbsoluteExpiration(TimeSpan.FromSeconds(10));
 
             _memoryCache.Set(LAST_ADDED_5_SONGS, lastSongs, cacheEntryOptions);
         }
-        
+
 
         if (lastSongs is null)
         {
@@ -42,7 +42,7 @@ public class SongController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<SongViewModel>> GetSong(int id, CancellationToken cancellationToken = default)
+    public async Task<ActionResult<SongViewModel>> GetSongById(int id, CancellationToken cancellationToken)
     {
         var song = await this._songService.GetSongByIdAsync(id, cancellationToken);
 
@@ -58,7 +58,15 @@ public class SongController : ControllerBase
     [ResponseCache(Duration = 60 * 5, Location = ResponseCacheLocation.None)]
     public async Task<ActionResult<IEnumerable<SongViewModel>>> GetAllSongs(CancellationToken cancellationToken)
     {
-        var songs = await this._songService.GetAllAsync(cancellationToken);
+        if (!this._memoryCache.TryGetValue(ALL_SONGS, out var songs))
+        {
+            songs = await this._songService.GetAllAsync(cancellationToken);
+
+            var cacheEntryOptions = new MemoryCacheEntryOptions()
+          .SetSlidingExpiration(TimeSpan.FromSeconds(10));
+
+            this._memoryCache.Set(ALL_SONGS, songs, cacheEntryOptions);
+        }
 
         if (songs is null)
         {
@@ -75,7 +83,7 @@ public class SongController : ControllerBase
         var songId = 0;
         try
         {
-             songId = await this._songService.CreateSongAsync(input, cancellationToken);
+            songId = await this._songService.CreateSongAsync(input, cancellationToken);
 
         }
         catch (Exception e)
@@ -84,7 +92,7 @@ public class SongController : ControllerBase
             return BadRequest(e.Message);
         }
 
-        return CreatedAtAction(nameof(GetSong), new { id = songId });
+        return CreatedAtAction(nameof(GetSongById), new {id = songId},input);
     }
 
     [HttpPut("id")]

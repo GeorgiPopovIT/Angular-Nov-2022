@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Song } from '../shared/interfaces/song';
-import { SongInputModel } from '../shared/interfaces/songInputModel';
 
 @Injectable({
   providedIn: 'root'
@@ -14,14 +13,14 @@ export class SongService {
   constructor(private httpClient : HttpClient) { }
 
   getAllSongs() : Observable<Song[]>{
-      return this.httpClient.get<Song[]>(this.songPath);
+    return this.httpClient.get<Song[]>(this.songPath);
   }
   
   getSongById(id : number) : Observable<Song>{
     return this.httpClient.get<Song>(this.songPath + `/${id}`)
   }
-  createSong(song : SongInputModel) : Observable<any>{
-    return this.httpClient.post<Song>(this.songPath + `/create`,song);
+  createSong(song : FormData) : Observable<any>{
+    return this.httpClient.post(this.songPath + `/create`,song);
   }
 
 }
