@@ -15,17 +15,13 @@ public class FileService : IFileService
 
     public async Task<string> UploadFileAsync(IFormFile input)
     {
-        byte[] destinationFile;
-        using (var memoryStream = new MemoryStream())
-        {
-            await input.CopyToAsync(memoryStream);
-            destinationFile = memoryStream.ToArray();
-        }
+        using var stream = input.OpenReadStream();
+       
         using (var destinationStream = new MemoryStream())
         {
             var uploadParams = new VideoUploadParams
             {
-                File = new FileDescription(input.FileName, destinationStream),
+                File = new FileDescription(input.FileName, stream),
                 UseFilename = true,
                 UniqueFilename = false,
                 Overwrite = true,
