@@ -26,10 +26,11 @@ public class UserService : IUserService
         {
             Subject = new ClaimsIdentity(new[]
             {
-               new Claim(ClaimTypes.Name, user.Id.ToString()),
-             }),
+				new Claim(ClaimTypes.Name, user.UserName),
+				new Claim(ClaimTypes.NameIdentifier, user.Email),
+			 }),
             Expires = DateTime.UtcNow.AddMinutes(5),
-            //Issuer = "Grp",
+            //Issuer = "Grp", 
             //Audience = "Grp",
             SigningCredentials = new SigningCredentials
             (new SymmetricSecurityKey(key),

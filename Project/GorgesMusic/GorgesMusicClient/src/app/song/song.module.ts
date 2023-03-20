@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { ListItemComponent } from './list-item/list-item.component';
 import { NewSongComponent } from './new-song/new-song.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Last5SongsComponent } from './last5-songs/last5-songs.component';
 
 
 
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ListComponent,
     PlayComponent,
     ListItemComponent,
-    NewSongComponent
+    NewSongComponent,
+    Last5SongsComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +31,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     RouterModule
   ],
-  exports:[ListComponent,PlayComponent,NewSongComponent]
+  exports:[ListComponent,PlayComponent,NewSongComponent, Last5SongsComponent]
 })
 export class SongModule { }

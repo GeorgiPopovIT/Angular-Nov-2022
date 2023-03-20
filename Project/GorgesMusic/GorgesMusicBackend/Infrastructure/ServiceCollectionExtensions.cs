@@ -1,6 +1,5 @@
-﻿namespace GorgesMusicBackend.Infrastructure
+﻿namespace GorgesMusicBackend.Infrastructure;
+
+public static class ServiceCollectionExtensions
 {
-    public static class ServiceCollectionExtensions
-    {
-    }
 }

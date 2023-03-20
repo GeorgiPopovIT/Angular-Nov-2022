@@ -15,6 +15,10 @@ export class SongService {
   getAllSongs() : Observable<Song[]>{
     return this.httpClient.get<Song[]>(this.songPath);
   }
+
+  getLast5Songs() : Observable<Song[]> {
+    return this.httpClient.get<Song[]>(this.songPath + '/lastsongs');
+  }
   
   getSongById(id : number) : Observable<Song>{
     return this.httpClient.get<Song>(this.songPath + `/${id}`)

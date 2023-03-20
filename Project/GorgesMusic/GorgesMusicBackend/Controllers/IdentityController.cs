@@ -33,14 +33,13 @@ public class IdentityController : ControllerBase
             Email = model.Email
         };
 
-        //var result = await this._userManager.CreateAsync(user, model.Password);
-        if (true)
+        var result = await this._userManager.CreateAsync(user, model.Password);
+        if (result.Succeeded)
         {
-
             return Ok();
         }
 
-        //return BadRequest(result.Errors);
+        return BadRequest(result.Errors);
 
     }
 
