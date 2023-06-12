@@ -1,4 +1,5 @@
 ﻿using GorgesMusic.Data.Models;
+using GorgesMusic.Data.Seed;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -36,7 +37,10 @@ public class GorgesMusicDbContext : IdentityDbContext<User>
             .Property(e => e.Genre)
             .HasConversion(v => v.ToString(),
                         v => (Genre)Enum.Parse(typeof(Genre), v));
+
         base.OnModelCreating(modelBuilder);
+
+        modelBuilder.ApplyConfiguration(new RoleConfiguration());
 
     }
 }

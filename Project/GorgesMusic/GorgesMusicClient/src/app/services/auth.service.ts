@@ -36,4 +36,14 @@ export class AuthService {
   get isLoggedIn() {
     return this.getToken;
   }
+
+  get isAdmin(){
+    //const token = localStorage.getItem("token");
+    //const decodedToken = this.jwtHelper.decodeToken(token);
+    //const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+
+    //return role === 'Administrator';
+
+    return false;
+  }
 }

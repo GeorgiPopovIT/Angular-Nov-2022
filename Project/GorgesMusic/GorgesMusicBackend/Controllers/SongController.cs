@@ -1,5 +1,6 @@
 ﻿using GorgesMusic.Core.Models.Songs;
 using GorgesMusic.Core.Songs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using static GorgesMusicBackend.Infrastructure.Constants.Constants.CacheName;
@@ -18,6 +19,7 @@ public class SongController : ControllerBase
         _songService = songService;
         this._memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
     }
+
     [HttpGet]
     [Route("lastSongs")]
     public async Task<ActionResult<IEnumerable<SongViewModel>>> GetLast5Songs(CancellationToken cancellationToken)
@@ -78,6 +80,7 @@ public class SongController : ControllerBase
 
     [HttpPost]
     [Route("create")]
+    [Authorize(Roles = "Administrator")]
     public async Task<ActionResult<SongInputModel>> Create([FromForm] SongInputModel input, CancellationToken cancellationToken)
     {
         var songId = 0;

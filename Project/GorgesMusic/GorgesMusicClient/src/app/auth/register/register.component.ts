@@ -12,8 +12,8 @@ import { twoPasswordGroupValidator } from 'src/app/shared/validators/passwordGro
 export class RegisterComponent   {
 
   registerForm =  this.fb.group({
-    email : ['',Validators.required,Validators.email],
-    username : ['',Validators.required,Validators.maxLength(100),Validators.minLength(5)],
+    email : ['',[Validators.required,Validators.email]],
+    username : ['',[Validators.required,Validators.maxLength(100),Validators.minLength(5)]],
     pass: this.fb.group({
       password: ['', [Validators.required, Validators.minLength(5)]],
       confirmPassword: [Validators.required]
@@ -33,8 +33,8 @@ export class RegisterComponent   {
           password : this.registerForm.value.pass?.password
         }
 
-        this.authService.register(this.registerForm.value).subscribe(data => {
-          console.log(data);
+        this.authService.register(formData).subscribe(data => {
+          //console.log(data);
           this.router.navigate(['/auth/login']);
         });
   }

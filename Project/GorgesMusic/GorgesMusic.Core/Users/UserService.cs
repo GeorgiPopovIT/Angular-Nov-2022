@@ -1,7 +1,6 @@
 ﻿using GorgesMusic.Core.Models.Users;
 using GorgesMusic.Data.Models;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -18,7 +17,7 @@ public class UserService : IUserService
         _userManager = userManager;
     }
 
-    public string GenerateJwtToken(User user,string secret)
+    public string GenerateJwtToken(User user, string secret)
     {
         var key = Encoding.UTF8.GetBytes(secret);
 
@@ -26,12 +25,10 @@ public class UserService : IUserService
         {
             Subject = new ClaimsIdentity(new[]
             {
-				new Claim(ClaimTypes.Name, user.UserName),
-				new Claim(ClaimTypes.NameIdentifier, user.Email),
-			 }),
-            Expires = DateTime.UtcNow.AddMinutes(5),
-            //Issuer = "Grp", 
-            //Audience = "Grp",
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.NameIdentifier, user.Email),
+             }),
+            Expires = DateTime.UtcNow.AddMinutes(3),
             SigningCredentials = new SigningCredentials
             (new SymmetricSecurityKey(key),
             SecurityAlgorithms.HmacSha256Signature)

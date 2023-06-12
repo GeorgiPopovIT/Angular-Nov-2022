@@ -6,6 +6,7 @@ using GorgesMusic.Data;
 using GorgesMusic.Data.Models;
 using GorgesMusic.Data.Seed;
 using GorgesMusicBackend;
+using GorgesMusicBackend.Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -26,9 +27,9 @@ builder.Services.AddDbContext<GorgesMusicDbContext>(options =>
 builder.Services.AddDefaultIdentity<User>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
-                options.Password.RequireDigit  =false;
+                options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase =  false;
+                options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
                 options.Password.RequiredLength = 5;
             })
@@ -54,10 +55,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret)),
             ValidateIssuer = false,
-            ValidateAudience = true 
+            ValidateAudience = true
         };
     });
-    
+
 
 builder.Services.AddAuthorization();
 
@@ -85,6 +86,8 @@ using (var scope = app.Services.CreateScope())
     //var cloudinaryService = scope.ServiceProvider.GetRequiredService<Cloudinary>();
 
     Seeder.SeedData(dbContext);
+
+    //SeedAdmin.SeedAdministrator(scope.ServiceProvider);
 
 }
 
