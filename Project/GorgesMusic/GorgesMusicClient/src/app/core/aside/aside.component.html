@@ -8,16 +8,16 @@
         <li class="active">
             <a routerLink="/">Homepage</a>
         </li>
-        <li *ngIf="!isLogged()">
+        <li *ngIf="!isLogged">
             <a routerLink="/auth/register">Register</a>
         </li>
-        <li *ngIf="!isLogged()">
+        <li *ngIf="!isLogged">
             <a routerLink="/auth/login">Login</a>
         </li>
-        <li *ngIf="isLogged()">
+        <li *ngIf="isLogged">
             <a routerLink="/auth/logout">Logout</a>
         </li>
-        <li>
+        <li *ngIf="isAdmin">
             <a routerLink="/song/create">Add new song</a>
         </li>
     </ul>

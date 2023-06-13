@@ -12,15 +12,18 @@ namespace GorgesMusicBackend.Controllers;
 [Route("[controller]")]
 public class IdentityController : ControllerBase
 {
+    private readonly RoleManager<IdentityRole> _roleManager;
     private readonly IUserService _userService;
     private readonly JwtSettings _jwtSettings;
     private readonly UserManager<User> _userManager;
 
-    public IdentityController(IUserService userService, UserManager<User> userManager, IOptions<JwtSettings> jwtSettings)
+    public IdentityController(IUserService userService, UserManager<User> userManager,
+        IOptions<JwtSettings> jwtSettings, RoleManager<IdentityRole> roleManager)
     {
         this._userService = userService;
         this._userManager = userManager;
         this._jwtSettings = jwtSettings.Value;
+        _roleManager = roleManager;
     }
 
     [HttpPost]
@@ -33,11 +36,22 @@ public class IdentityController : ControllerBase
             Email = model.Email
         };
 
+        var role = new IdentityRole("Viewer");
+
         var result = await this._userManager.CreateAsync(user, model.Password);
+
+        if (!await this._roleManager.RoleExistsAsync("Viewer"))
+        {
+            await this._roleManager.CreateAsync(role);
+        }
+
+        await this._userManager.AddToRoleAsync(user, role.Name);
+
         if (result.Succeeded)
         {
             return Ok();
         }
+
 
         return BadRequest(result.Errors);
 
@@ -58,10 +72,10 @@ public class IdentityController : ControllerBase
         var passwordCheck = await this._userManager.CheckPasswordAsync(user, model.Password);
         if (!passwordCheck)
         {
-            return Unauthorized();
+            return Unauthorized("Wrong password");
         }
         var token = this._userService.GenerateJwtToken(user, this._jwtSettings.Secret);
 
-        return Ok(new JwtSettings { Secret = token});
+        return Ok(new JwtSettings { Secret = token });
     }
 }

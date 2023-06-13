@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -12,7 +13,7 @@ export class AuthService {
   private loginPath = environment.apiURL + '/identity/login';
   private registerPath = environment.apiURL + '/identity/register';
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient : HttpClient, private jwtHelper: JwtHelperService) { }
 
   login(data : any) : Observable<any> {
     return this.httpClient.post(this.loginPath,data);
@@ -26,24 +27,31 @@ export class AuthService {
     localStorage.setItem('token',token);
   }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem('token');
   }
 
   logOut() : void {
      localStorage.removeItem('token');
   }
+
   get isLoggedIn() {
-    return this.getToken;
+    let isExpired = this.jwtHelper.isTokenExpired(this.getToken());
+    if(isExpired){
+      this.logOut();
+    }
+    return this.getToken();
   }
-
+  
   get isAdmin(){
-    //const token = localStorage.getItem("token");
-    //const decodedToken = this.jwtHelper.decodeToken(token);
-    //const role = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+    const token = this.getToken();
+    const decodedToken = this.jwtHelper.decodeToken(token!);
 
-    //return role === 'Administrator';
+    if(!decodedToken){
+      return;
+    }
+    const role = decodedToken['role'];
 
-    return false;
+    return role === 'Administrator';
   }
 }

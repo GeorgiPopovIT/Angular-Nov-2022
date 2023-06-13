@@ -9,6 +9,11 @@ import { SongModule } from './song/song.module';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthRoutingModule } from './auth/auth-routing.module';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+    return localStorage.getItem("access_token");
+}
 
 @NgModule({
     declarations: [
@@ -24,7 +29,14 @@ import { AuthRoutingModule } from './auth/auth-routing.module';
         SongModule,
         RouterModule,
         BrowserAnimationsModule,
-        AuthRoutingModule
+        AuthRoutingModule,
+        JwtModule.forRoot({
+            config: {
+                tokenGetter: tokenGetter,
+                allowedDomains: ["localhost:4200"],
+                disallowedRoutes: []
+            }
+        })
     ]
 })
 export class AppModule { }

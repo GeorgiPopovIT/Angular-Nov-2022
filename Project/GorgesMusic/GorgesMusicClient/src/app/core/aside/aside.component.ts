@@ -14,4 +14,8 @@ export class AsideComponent {
   get isLogged(){
     return this.authService.isLoggedIn;
   }
+
+  get isAdmin(){
+    return this.authService.isAdmin;
+  }
 }

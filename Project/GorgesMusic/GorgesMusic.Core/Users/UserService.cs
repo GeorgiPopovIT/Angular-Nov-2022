@@ -21,12 +21,15 @@ public class UserService : IUserService
     {
         var key = Encoding.UTF8.GetBytes(secret);
 
+        var roleName = this._userManager.GetRolesAsync(user).Result.FirstOrDefault();
+
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.Name, user.UserName),
                 new Claim(ClaimTypes.NameIdentifier, user.Email),
+                new Claim(ClaimTypes.Role,roleName)
              }),
             Expires = DateTime.UtcNow.AddMinutes(3),
             SigningCredentials = new SigningCredentials
@@ -58,5 +61,6 @@ public class UserService : IUserService
 
         return false;
     }
+
 
 }
