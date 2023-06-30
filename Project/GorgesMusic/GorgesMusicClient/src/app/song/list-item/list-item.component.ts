@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Song } from 'src/app/shared/interfaces/song';
-import { NgOptimizedImage } from '@angular/common'
 
 @Component({
   selector: 'app-list-item',
@@ -12,13 +11,13 @@ export class ListItemComponent  {
   public song! : Song;
 
   @Output()
-  public songId = new EventEmitter<Song>();
+  public songToEmit = new EventEmitter<Song>();
   
   constructor() { }
 
   songClicked(currentSong : Song){
-    this.songId.emit(currentSong);
+    this.songToEmit.emit(currentSong);
 
-    console.log('Song audio: ' + currentSong !=  null);
+    this.song = currentSong;
   }
 }

@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
     page : number = 1;
     listSize : number = 16;
 
-    public song! : Song;
+    public songToEmit! : Song;
    
     constructor(private songService : SongService) { }
 
@@ -33,10 +33,10 @@ export class ListComponent implements OnInit {
   }
 
   songPlayingHandler(currSong : Song){
-    this.song = currSong;
+    this.songToEmit = currSong;
 
     console.log('song to play + song audio');
-    console.log(this.song != null);
+    console.log(this.songToEmit != null);
   }
 
   listSongOnChange(event : any){
