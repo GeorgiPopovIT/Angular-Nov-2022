@@ -15,7 +15,6 @@ export class Last5SongsComponent implements OnInit {
 
   public song! : Song;
 
-
   constructor(private songService : SongService) { }
 
   ngOnInit(): void {
