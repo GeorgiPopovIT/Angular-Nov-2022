@@ -1,8 +1,12 @@
 <div *ngIf="songs$ | async as songs" class="row">
   <div *ngFor="let currentSong of songs" class="col-3 col-sm-3 col-md-3 col-lg-3">
-    <app-list-item [song]="currentSong" (songId)="songPlayingHandler($event)"></app-list-item>
+    <app-list-item [song]="currentSong" (songToEmit)="songPlayingHandler($event)"></app-list-item>
   </div>
 </div>
 
-<app-play [song]="song"></app-play>
+<div *ngIf="!songs">
+  <mat-spinner></mat-spinner>
+</div>
+
+<app-play [songToPlay]="song"></app-play>
 
