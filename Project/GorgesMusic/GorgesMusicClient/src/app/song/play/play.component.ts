@@ -1,37 +1,30 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges,OnInit, SimpleChanges } from '@angular/core';
 import { SongService } from 'src/app/services/song.service';
 import { Song } from 'src/app/shared/interfaces/song';
 import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-play',
   templateUrl: './play.component.html',
   styleUrls: ['./play.component.css']
 })
-export class PlayComponent implements OnChanges, OnInit {
+export class PlayComponent  implements OnInit, OnChanges  {
 
   @Input()
-  public song! : Song;
+  public songToPlay! : Song;
+
+//   public $$song = new BehaviorSubject<null | any>(0);
 
   constructor(private songService : SongService,private route : ActivatedRoute)
    {}
-   
-  ngOnInit(): void {
-    //this.loadSong(this.song.id);
+  
+ 
+  ngOnChanges(changes: SimpleChanges): void {
   }
   
-  ngOnChanges(changes: SimpleChanges): void {
-    //this.loadSong(changes['song'].currentValue.id);
+  ngOnInit(): void {
+
   }
 
-  loadSong(id : number) : void{
-    this.songService.getSongById(id).subscribe({
-      next :(value) => {
-        this.song = value;
-      },
-      error: (Response) => {
-        console.log(Response);
-      }
-    });
-  }
 }
