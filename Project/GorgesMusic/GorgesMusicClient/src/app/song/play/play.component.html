@@ -1,7 +1,7 @@
   <!-- <ng-container #vc> -->
-    <div *ngIf="song">
+    <div *ngIf="songToPlay">
       <audio controls autoplay>
-          <source src="{{song.audioLink}}" type="audio/mpeg">
+          <source src="{{songToPlay.audioLink}}" type="audio/mpeg">
             Your browser does not support the audio element.
       </audio>
     </div>

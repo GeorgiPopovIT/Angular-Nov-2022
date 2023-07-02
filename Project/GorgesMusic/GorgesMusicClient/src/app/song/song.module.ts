@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ListComponent } from './list/list.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
@@ -29,7 +29,8 @@ import { Last5SongsComponent } from './last5-songs/last5-songs.component';
     MatProgressSpinnerModule,
     NgxPaginationModule,
     HttpClientModule,
-    RouterModule
+    RouterModule,
+    NgOptimizedImage
   ],
   exports:[ListComponent,PlayComponent,NewSongComponent, Last5SongsComponent]
 })
