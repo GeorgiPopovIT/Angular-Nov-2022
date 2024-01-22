@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ListComponent } from './list/list.component';
-import {MatLegacyProgressSpinnerModule as MatProgressSpinnerModule} from '@angular/material/legacy-progress-spinner';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {NgxPaginationModule} from 'ngx-pagination'; 
 import { PlayComponent } from './play/play.component';
 import { HttpClientModule } from '@angular/common/http';

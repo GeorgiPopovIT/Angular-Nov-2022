@@ -19,11 +19,9 @@ public class SongService : ISongService
 
     public async Task<int> CreateSongAsync(SongInputModel input, CancellationToken cancellationToken)
     {
-        if (input is null)
-        {
-            throw new ArgumentNullException("Input is null.");
-        }
-        else if (this._dbContext.Songs.Any(s => s.Name == input.Name))
+        ArgumentNullException.ThrowIfNull(input);
+
+        if (this._dbContext.Songs.Any(s => s.Name == input.Name))
         {
             throw new ArgumentException("This song already exist.");
         }
@@ -48,10 +46,7 @@ public class SongService : ISongService
     {
         var currentSong = await this._dbContext.Songs.FindAsync("");
 
-        if (currentSong is null)
-        {
-            throw new ArgumentNullException("This is song is not avaliable.");
-        }
+        ArgumentNullException.ThrowIfNull(currentSong);
 
         currentSong.Name = input.Name;
         //currentSong.Genre = input.Genre;

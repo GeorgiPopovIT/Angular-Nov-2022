@@ -37,7 +37,7 @@ public class SongController : ControllerBase
 
         if (lastSongs is null)
         {
-            return BadRequest("Songs are null.");
+            return BadRequest("There are not songs.");
         }
 
         return Ok(lastSongs);
@@ -99,6 +99,7 @@ public class SongController : ControllerBase
     }
 
     [HttpPut("id")]
+    [Authorize(Roles = "Administrator")]
     public async Task<ActionResult> UpdateSong(int id, SongInputModel input)
     {
         if (input is null)
@@ -119,7 +120,8 @@ public class SongController : ControllerBase
     }
 
     [HttpDelete("id")]
-    public async Task<ActionResult> DeleteSong(int id, CancellationToken cancellationToken)
+    [Authorize(Roles = "Administrator")]
+    public async Task<ActionResult> DeleteSong(int id, CancellationToken cancellationToken) 
     {
         var isDeletedSong = await this._songService.DeleteSongAsync(id, cancellationToken);
         if (!isDeletedSong)

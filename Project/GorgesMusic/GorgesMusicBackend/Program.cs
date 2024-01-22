@@ -6,7 +6,7 @@ using GorgesMusic.Data;
 using GorgesMusic.Data.Models;
 using GorgesMusic.Data.Seed;
 using GorgesMusicBackend;
-using GorgesMusicBackend.Infrastructure;
+using GorgesMusicBackend.Controllers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -104,11 +104,14 @@ app.UseHttpsRedirection();
 
 app.UseCors(policy => policy.AllowAnyHeader()
             .AllowAnyMethod().AllowAnyOrigin());
+
 app.UseResponseCaching();
 
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+//app.MapSongEndpoints();
 
 app.Run();

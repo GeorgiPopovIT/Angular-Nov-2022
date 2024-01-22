@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Song } from 'src/app/shared/interfaces/song';
 import { SongService } from 'src/app/services/song.service';
 import { Observable } from 'rxjs';
@@ -15,8 +15,8 @@ export class ListComponent implements OnInit {
     listSize : number = 16;
 
     public songToEmit! : Song;
+    private songService = inject(SongService);
    
-    constructor(private songService : SongService) { }
 
   ngOnInit(): void {
     this.songs$ = this.songService.getAllSongs();
@@ -36,7 +36,6 @@ export class ListComponent implements OnInit {
     this.songToEmit = currSong;
 
     console.log('song to play + song audio');
-    console.log(this.songToEmit != null);
   }
 
   listSongOnChange(event : any){

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, effect, signal } from '@angular/core';
 import { Song } from 'src/app/shared/interfaces/song';
 
 @Component({
@@ -9,15 +9,16 @@ import { Song } from 'src/app/shared/interfaces/song';
 export class ListItemComponent  {
   @Input()
   public song! : Song;
+  
 
   @Output()
   public songToEmit = new EventEmitter<Song>();
   
-  constructor() { }
+  constructor() {}
 
   songClicked(currentSong : Song){
     this.songToEmit.emit(currentSong);
 
-    this.song = currentSong;
+    //this.song = currentSong;
   }
 }

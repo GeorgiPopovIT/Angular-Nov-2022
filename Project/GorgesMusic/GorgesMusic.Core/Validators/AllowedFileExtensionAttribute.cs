@@ -10,7 +10,7 @@ internal class AllowedFileExtensionAttribute : ValidationAttribute
     {
         this._extensions = extensions;
     }
-   
+
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
         var file = value as IFormFile;
@@ -27,7 +27,5 @@ internal class AllowedFileExtensionAttribute : ValidationAttribute
     }
 
     public string GetErrorMessage()
-    {
-        return $"This file extension is not allowed!";
-    }
+        => $"This file extension is not allowed!";
 }

@@ -9,17 +9,15 @@ import { Song } from 'src/app/shared/interfaces/song';
   templateUrl: './last5-songs.component.html',
   styleUrls: ['./last5-songs.component.css']
 })
-export class Last5SongsComponent implements OnInit, OnChanges {
+export class Last5SongsComponent implements OnInit {
   public songs$! : Observable<Song[]>;
   public songs! : Song[];
 
   
   public song! : Song;
 
-  constructor(private songService : SongService) { }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.song);
-  }
+  constructor(private songService : SongService) {}
+  
 
   ngOnInit(): void {
     this.songs$ = this.songService.getLast5Songs();
