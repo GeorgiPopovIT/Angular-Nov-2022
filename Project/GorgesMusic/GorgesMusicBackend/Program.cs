@@ -83,7 +83,6 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<GorgesMusicDbContext>();
-    //var cloudinaryService = scope.ServiceProvider.GetRequiredService<Cloudinary>();
 
     Seeder.SeedData(dbContext);
 
