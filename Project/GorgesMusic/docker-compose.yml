@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: postgres_db
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes: 
+      - pgdata:/var/lib/postgresql/data
+    networks:
+        - gorgesMusic_network
+  gorgesmusicbackend:
+    container_name: gorgesMusic_backend
+    image: ${DOCKER_REGISTRY-}gorgesmusicbackend
+    build:
+      context: .
+      dockerfile: GorgesMusicBackend/Dockerfile
+    depends_on:
+     - "db"
+    networks:
+      - gorgesMusic_network
+volumes:
+    pgdata:
+networks:
+    gorgesMusic_network:
+        driver: bridge
