@@ -20,7 +20,8 @@ export class PlayComponent  implements OnChanges  {
   
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['songToPlay'] !== undefined){
-       this.songUrl.update(v =>v = changes['songToPlay'].currentValue);
+      this.songToPlay = changes['songToPlay'].currentValue;
+       //this.songUrl.update(v =>v = changes['songToPlay'].currentValue);
        document.getElementsByTagName('audio')[0].load();
     }
   }

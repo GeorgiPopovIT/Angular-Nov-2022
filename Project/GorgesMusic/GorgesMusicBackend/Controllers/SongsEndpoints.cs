@@ -1,5 +1,6 @@
 ﻿using GorgesMusic.Core.Models.Songs;
 using GorgesMusic.Core.Songs;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using static GorgesMusicBackend.Infrastructure.Constants.Constants.CacheName;
@@ -10,7 +11,7 @@ public static class SongsEndpoints
 {
     public static void MapSongEndpoints(this IEndpointRouteBuilder app)
     {
-        app.MapGet("api/lastSongs", async (ISongService songService, IMemoryCache memoryCache, CancellationToken cancellationToken) =>
+        app.MapGet("api/lastSongs",async (ISongService songService, IMemoryCache memoryCache, CancellationToken cancellationToken) =>
         {
             if (!memoryCache.TryGetValue(LAST_ADDED_5_SONGS, out var lastSongs))
             {
@@ -21,13 +22,10 @@ public static class SongsEndpoints
 
                 memoryCache.Set(LAST_ADDED_5_SONGS, lastSongs, cacheEntryOptions);
             }
-
-            if (lastSongs is null)
-            {
-                return Results.BadRequest("There are not songs.");
-            }
-
-            return Results.Ok(lastSongs);
+            return lastSongs is null
+                    ? Results.NotFound("There are not songs.")
+                    : Results.Ok(lastSongs);
+               
         });
 
         app.MapGet("api/{id}", async (int id, ISongService songService, CancellationToken cancellationToken) =>

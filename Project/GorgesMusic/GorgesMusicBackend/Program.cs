@@ -15,7 +15,7 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 Account account = new(
-    builder.Configuration["Cloudinary:CloudName"],
+    "daxn3ngly",//builder.Configuration["Cloudinary:CloudName"],
     builder.Configuration["Cloudinary:ApiKey"],
     builder.Configuration["Cloudinary:ApiSecret"]);
 
@@ -36,7 +36,7 @@ builder.Services.AddDefaultIdentity<User>(options =>
               .AddRoles<IdentityRole>()
               .AddEntityFrameworkStores<GorgesMusicDbContext>();
 
-Cloudinary cloudinary = new Cloudinary(account);
+Cloudinary cloudinary = new(account);
 //cloudinary.Api.Secure = true;
 
 var jwtSettingsConfiguration = builder.Configuration.GetSection("JwtSettings");
@@ -97,9 +97,9 @@ if (app.Environment.IsDevelopment())
     //app.UseSwaggerUI();
 }
 
+app.UseHttpsRedirection();
 app.UseDefaultFiles();
 app.UseStaticFiles();
-app.UseHttpsRedirection();
 
 app.UseCors(policy => policy.AllowAnyHeader()
             .AllowAnyMethod().AllowAnyOrigin());
@@ -110,7 +110,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
 //app.MapSongEndpoints();
 
 app.Run();

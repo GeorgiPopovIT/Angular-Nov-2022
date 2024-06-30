@@ -1,5 +1,5 @@
 // import { compileNgModule } from '@angular/compiler';
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SongService } from 'src/app/services/song.service';
 import { Song } from 'src/app/shared/interfaces/song';
@@ -13,8 +13,8 @@ export class Last5SongsComponent implements OnInit {
   public songs$! : Observable<Song[]>;
   public songs! : Song[];
 
-  
-  public song! : Song;
+  @Output()
+  public songToEmit = new EventEmitter<Song>();
 
   constructor(private songService : SongService) {}
   
@@ -35,7 +35,6 @@ loadSongs(){
   }  
 
   songPlayingHandler(currSong : Song){
-    this.song = currSong;
+    this.songToEmit.emit(currSong);
   }
-
 }

@@ -9,7 +9,6 @@ import { Song } from 'src/app/shared/interfaces/song';
 export class ListItemComponent  {
   @Input()
   public song! : Song;
-  
 
   @Output()
   public songToEmit = new EventEmitter<Song>();
@@ -18,7 +17,5 @@ export class ListItemComponent  {
 
   songClicked(currentSong : Song){
     this.songToEmit.emit(currentSong);
-
-    //this.song = currentSong;
   }
 }

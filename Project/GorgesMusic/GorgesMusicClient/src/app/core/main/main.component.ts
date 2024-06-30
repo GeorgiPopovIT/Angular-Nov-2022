@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { Song } from 'src/app/shared/interfaces/song';
 
 
 @Component({
@@ -6,12 +7,14 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent  implements OnInit {
-
+export class MainComponent {
+  @Output()
+  public songToPlay! : Song;
   constructor() { }
+  
 
-  ngOnInit(): void {
-    
+  songPlaying(songToPlay : Song){
+    this.songToPlay = songToPlay;
+    console.log(songToPlay);
   }
-
 }
