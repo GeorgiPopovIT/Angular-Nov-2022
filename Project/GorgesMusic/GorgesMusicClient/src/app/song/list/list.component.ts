@@ -11,14 +11,15 @@ import { Observable } from 'rxjs';
 export class ListComponent implements OnInit {
     public songs$! : Observable<Song[]>;
     public songs! : Song[];
+
     page : number = 1;
     listSize : number = 16;
-    @Output()
-    public songToEmit = new EventEmitter<Song>();
+    
+    @Output() songToEmit = new EventEmitter<Song>();
     public song! : Song;
+
     private songService = inject(SongService);
    
-
   ngOnInit(): void {
     this.songs$ = this.songService.getAllSongs();
   }

@@ -1,7 +1,6 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ListComponent } from './list/list.component';
-import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {NgxPaginationModule} from 'ngx-pagination'; 
 import { PlayComponent } from './play/play.component';
@@ -32,6 +31,7 @@ import { Last5SongsComponent } from './last5-songs/last5-songs.component';
     RouterModule,
     NgOptimizedImage
   ],
-  exports:[ListComponent,PlayComponent,NewSongComponent, Last5SongsComponent]
+  exports:[ListComponent,PlayComponent,NewSongComponent, Last5SongsComponent],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SongModule { }

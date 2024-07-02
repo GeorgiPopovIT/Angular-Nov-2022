@@ -13,8 +13,7 @@ export class Last5SongsComponent implements OnInit {
   public songs$! : Observable<Song[]>;
   public songs! : Song[];
 
-  @Output()
-  public songToEmit = new EventEmitter<Song>();
+  @Output() songToEmit = new EventEmitter<Song>();
 
   constructor(private songService : SongService) {}
   
