@@ -17,8 +17,8 @@
               "base": "dist/gorges-music-client"
             },
             "index": "src/index.html",
-            "polyfills": [
-              "src/polyfills.ts"
+            "polyfills": ["zone.js",
+            "@angular/localize/init"
             ],
             "tsConfig": "tsconfig.app.json",
             "assets": [
