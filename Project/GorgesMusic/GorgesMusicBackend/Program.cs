@@ -13,16 +13,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateSlimBuilder(args);
 Account account = new(
     "daxn3ngly",//builder.Configuration["Cloudinary:CloudName"],
     builder.Configuration["Cloudinary:ApiKey"],
     builder.Configuration["Cloudinary:ApiSecret"]);
 
-
 // Add services to the container.
 builder.Services.AddDbContext<GorgesMusicDbContext>(options =>
         options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.WebHost.UseKestrelHttpsConfiguration();
 
 builder.Services.AddDefaultIdentity<User>(options =>
             {
@@ -67,8 +68,6 @@ builder.Services.AddMemoryCache();
 builder.Services.AddResponseCaching();
 
 
-builder.Services.AddControllers();
-
 //builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
 
@@ -97,8 +96,6 @@ if (app.Environment.IsDevelopment())
     //app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.UseCors(policy => policy.AllowAnyHeader()
@@ -109,7 +106,6 @@ app.UseResponseCaching();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
-//app.MapSongEndpoints();
+app.MapSongEndpoints();
 
 app.Run();
