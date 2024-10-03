@@ -7,11 +7,9 @@ import { Song } from 'src/app/shared/interfaces/song';
   styleUrls: ['./list-item.component.css']
 })
 export class ListItemComponent  {
-  @Input()
-  public song! : Song;
+  @Input() song! : Song;
 
-  @Output()
-  public songToEmit = new EventEmitter<Song>();
+  @Output() songToEmit = new EventEmitter<Song>();
   
   constructor() {}
 

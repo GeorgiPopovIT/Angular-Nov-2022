@@ -11,8 +11,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class PlayComponent  implements OnChanges  {
 
-  @Input()
-  public songToPlay! : Song;
+  @Input() songToPlay! : Song;
   public songUrl = signal(this.songToPlay);
 
   constructor(private songService : SongService,private route : ActivatedRoute)

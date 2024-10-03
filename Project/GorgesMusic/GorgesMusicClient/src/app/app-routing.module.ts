@@ -4,7 +4,7 @@ import { MainComponent } from './core/main/main.component';
 import { PageNotFoundComponent } from './core/page-not-found/page-not-found.component';
 import { NewSongComponent } from './song/new-song/new-song.component';
 import { PlayComponent } from './song/play/play.component';
-import { AdminGuard } from './shared/guards/admin.guard';
+import { AuthGuard } from './shared/guards/auth-guard.guard';
 
 const routes: Routes = [
   {
@@ -22,7 +22,8 @@ const routes: Routes = [
   },
   {
     path : 'song/:id',
-    component: PlayComponent
+    component: PlayComponent,
+    canActivate:[AuthGuard]
   },
   {
     path : 'auth',

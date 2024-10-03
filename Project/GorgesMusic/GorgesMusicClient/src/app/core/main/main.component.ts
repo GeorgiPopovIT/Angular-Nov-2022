@@ -8,8 +8,7 @@ import { Song } from 'src/app/shared/interfaces/song';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent {
-  @Output()
-  public songToPlay! : Song;
+  @Output() songToPlay! : Song;
   constructor() { }
   
 

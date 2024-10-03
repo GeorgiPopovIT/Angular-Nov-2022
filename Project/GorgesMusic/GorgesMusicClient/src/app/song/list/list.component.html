@@ -4,3 +4,7 @@
   </div>
 </div>
 <pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+<div *ngIf="!songs">
+  <mat-spinner color="blue"></mat-spinner> 
+</div>

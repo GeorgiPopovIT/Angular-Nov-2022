@@ -22,10 +22,7 @@ public static class SongsEndpoints
 
                 memoryCache.Set(LAST_ADDED_5_SONGS, lastSongs, cacheEntryOptions);
             }
-            return lastSongs is null
-                    ? Results.NotFound("There are not songs.")
-                    : Results.Ok(lastSongs);
-               
+            return Results.Ok(lastSongs);
         });
 
         app.MapGet("api/{id}", async (int id, ISongService songService, CancellationToken cancellationToken) =>
