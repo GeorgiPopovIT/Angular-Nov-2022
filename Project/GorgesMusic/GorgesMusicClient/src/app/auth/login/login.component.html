@@ -1,18 +1,18 @@
 <div class="container">
     <h1>Login</h1>
-    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+    <form #loginForm="ngForm"  (ngSubmit)="loginSubmit(loginForm.value)">
         <div class="form-group">
             <label for="username">Username</label>
-            <input id="username" type="text" name="username" class="form-control" formControlName="username"  placeholder="Enter username" >
-            <ng-container *ngIf="loginForm.get('username')?.touched">
-                <span class="text-danger" *ngIf="loginForm.get('username')?.errors?.['required']">Username is required</span>
-            </ng-container>
+            <input id="username" type="text" name="username" class="form-control" placeholder="Enter username" #username="ngModel" ngModel required>
+           <ng-container *ngIf="username.touched">
+            <span class="text-danger" *ngIf="username.errors?.['required']">Username is required</span>
+           </ng-container>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input id="password" type="password" class="form-control" formControlName="password" placeholder="Password">
-          <ng-container *ngIf="loginForm.get('pass')?.touched">
-            <span class="text-danger" *ngIf="loginForm.get('pass')?.errors?.['required']">Password required</span>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter password" #password="ngModel" ngModel required>
+          <ng-container *ngIf="password.touched">
+            <span class="text-danger" *ngIf="password.errors?.['required']">Password is required</span>
           </ng-container>
         </div>
         <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary">Submit</button>

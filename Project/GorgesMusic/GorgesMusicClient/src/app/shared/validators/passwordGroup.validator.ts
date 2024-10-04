@@ -5,6 +5,6 @@ export function twoPasswordGroupValidator(controlName1: string, controlName2: st
     const group = control as FormGroup;
     const ctrl1 = group.get(controlName1);
     const ctrl2 = group.get(controlName2)
-    return ctrl1?.value === ctrl2?.value ? null : { twoPasswordGroupValidator: true };
+    return ctrl1?.value === ctrl2?.value ? null : { passwordMatches: true };
   };
 }

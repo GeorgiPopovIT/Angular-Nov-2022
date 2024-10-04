@@ -9,17 +9,17 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  loginForm = this.fb.group({
-    'username' : ['',Validators.required],
-    'password' : ['',Validators.required]
-  });
-  constructor(private fb : FormBuilder, private authService : AuthService, private router : Router) { }
+  constructor(private authService : AuthService, private router : Router) { }
 
   ngOnInit(): void {
   }
 
-  loginSubmit(){
-    this.authService.login(this.loginForm.value).subscribe (data => {
+  loginSubmit(loginForm : NgForm) : void{
+    if(loginForm.invalid){
+      return;
+    }
+    
+    this.authService.login(loginForm.value).subscribe (data => {
       this.authService.saveToken(data['secret']);
       this.router.navigate(['/']);
     });

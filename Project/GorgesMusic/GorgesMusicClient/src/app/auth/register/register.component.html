@@ -3,39 +3,40 @@
 <form [formGroup]="registerForm" (ngSubmit)="register()">
     <div class="form-group">
       <label for="email">Email address</label>
-      <input formControlName="email" type="email"  class="form-control" placeholder="Enter email" [email]="true">
+      <input formControlName="email" type="email" class="form-control" placeholder="Enter email">
       <ng-container *ngIf="registerForm.get('email')?.touched">
-        <span class="text-danger" *ngIf="registerForm.get('email')?.errors?.['required']">Email is required!</span>
-        <span class="text-danger" *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email!</span>
+        <span class="text-danger" *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</span>
+        <span class="text-danger" *ngIf="registerForm.get('email')?.errors?.['email']">Invalid email</span>
       </ng-container>
     </div>
     <div>
         <label for="username">Username</label>
         <input id="username" type="text" formControlName="username" class="form-control" placeholder="Enter username">
         <ng-container *ngIf="registerForm.get('username')?.touched">
-          <span class="text-danger" *ngIf="registerForm.get('username')?.errors?.['required']">Username is required!</span>
-          <span class="text-danger" *ngIf="registerForm.get('username')?.errors?.['minlength']">Username must be at least 5 characters!</span>
+          <span class="text-danger" *ngIf="registerForm.get('username')?.errors?.['required']">Username is required</span>
+          <span class="text-danger" *ngIf="registerForm.get('username')?.errors?.['minlength']">Username must be at least 5 characters</span>
         </ng-container>
     </div>
     
+  <ng-container formGroupName="pass">
     <div class="form-group">
       <label for="password">Password</label>
-      <input id="password" formControlName="password" class="form-control" placeholder="Password">
+      <input id="password" type="password" name="password" formControlName="password" class="form-control" placeholder="Password">
       <ng-container *ngIf="registerForm.get('pass')?.get('password')?.touched">
-        <span class="text-danger" *ngIf="registerForm.get('pass')?.get('password')?.errors?.['required']">Password is required!</span>
-        <span class="text-danger" *ngIf="registerForm.get('pass')?.get('password')?.errors?.['minlength']">Password must be at least 5 characters!</span>
+        <span class="text-danger" *ngIf="registerForm.get('pass')?.get('password')?.errors?.['required']">Password is required</span>
+        <span class="text-danger" *ngIf="registerForm.get('pass')?.get('password')?.errors?.['minLength']">Password must be at least 5 characters</span>
       </ng-container>
     </div>
     <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confim password">
-        <ng-container *ngIf="registerForm.get('pass')?.get('confirmPassword')?.touched">
-          <span class="text-danger" *ngIf="registerForm.get('pass')?.get('confirmPassword')?.errors?.['required']">Password is required!</span>
-          <span class="text-danger" *ngIf="registerForm.get('pass')?.errors?.['sameValueGroupValidator']
-           && registerForm.get('pass')?.get('confirmPassword')?.touched">Repeat password does not match password!</span>
+        <label for="rePassword">Confirm Password</label>
+        <input id="rePassword" type="password" name="rePassword" formControlName="rePassword" class="form-control" placeholder="Confirm password">
+        <ng-container *ngIf="registerForm.get('pass')?.get('rePassword')?.touched">
+          <span class="text-danger" *ngIf="registerForm.get('pass')?.get('rePassword')?.errors?.['required']">Confirm Password is required</span>
+          <span class="text-danger" *ngIf="registerForm.get('pass')?.errors?.['passwordMatches']
+           && registerForm.get('pass')?.get('rePassword')?.touched">Repeat password does not match password</span>
         </ng-container>
     </div>
-
-    <button type="submit" [disabled]="!registerForm.valid" class="btn btn-primary">Submit</button> 
+  </ng-container>
+    <button [disabled]="registerForm.invalid" class="btn btn-primary">Submit</button>
   </form>
 </div>
