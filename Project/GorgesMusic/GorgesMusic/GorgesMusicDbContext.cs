@@ -25,7 +25,7 @@ public class GorgesMusicDbContext : IdentityDbContext<User>
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql("Host=localhost; Database=GorgesMusic; Username=postgres; Password=12345");
+        optionsBuilder.UseNpgsql("Host=localhost; Database=GorgesMusic; Username=postgres; Password=123456");
 
         base.OnConfiguring(optionsBuilder);
     }
