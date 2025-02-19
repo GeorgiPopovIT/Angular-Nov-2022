@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { Song } from 'src/app/shared/interfaces/song';
-
+import { Song } from '../../shared/interfaces/song';
 
 @Component({
   selector: 'app-main',

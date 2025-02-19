@@ -1,9 +1,10 @@
 import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
-import { Song } from 'src/app/shared/interfaces/song';
-import { SongService } from 'src/app/services/song.service';
+import { Song } from '../../shared/interfaces/song';
+import { SongService } from '../../services/song.service';
 import { Observable } from 'rxjs';
 
 @Component({
+  standalone: false,
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.css']

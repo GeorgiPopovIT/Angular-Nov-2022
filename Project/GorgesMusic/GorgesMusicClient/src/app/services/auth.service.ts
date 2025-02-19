@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
@@ -13,7 +13,9 @@ export class AuthService {
   private loginPath = environment.apiURL + '/identity/login';
   private registerPath = environment.apiURL + '/identity/register';
 
-  constructor(private httpClient : HttpClient, private jwtHelper: JwtHelperService) { }
+  private jwtHelper = inject(JwtHelperService);
+
+  constructor(private httpClient : HttpClient) { }
 
   login(data : any) : Observable<any> {
     return this.httpClient.post(this.loginPath,data);

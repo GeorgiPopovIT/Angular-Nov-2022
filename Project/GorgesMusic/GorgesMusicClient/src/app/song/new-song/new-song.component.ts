@@ -1,26 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SongService } from 'src/app/services/song.service';
+import { SongService } from '../../services/song.service';
 
 
 @Component({
+  standalone: false,
   selector: 'app-new-song',
   templateUrl: './new-song.component.html',
   styleUrls: ['./new-song.component.css']
 })
 export class NewSongComponent  {
+
+  private fileUpload! : File;
+  private fb = inject(FormBuilder);
+  private songService = inject(SongService);
+  private router = inject(Router);
+
   newSongForm = this.fb.group({
     name : ['',Validators.required],
     genre : ['',Validators.required],
     imageLink : ['',Validators.required],
     songAudio : ['',Validators.required]
   });
-
-  private fileUpload! : File;
-
-  constructor(private fb : FormBuilder, private songService : SongService, private router : Router) {}
- 
   
   onFileSelected($event  :any){
     this.fileUpload = $event.target.files[0];
