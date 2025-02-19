@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
       return;
     }
     
-    this.authService.login(loginForm.value).subscribe (data => {
+    this.authService.login(loginForm).subscribe (data => {
       this.authService.saveToken(data['secret']);
       this.router.navigate(['/']);
     });
